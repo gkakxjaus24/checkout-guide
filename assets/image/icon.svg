@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 앱 아이콘: 검은 배경 + 흰 말풍선 + 체크 마크 -->
+  <rect width="512" height="512" rx="90" fill="#1a1a1a"/>
+  <!-- 말풍선 몸통 -->
+  <rect x="72" y="96" width="368" height="260" rx="32" fill="white"/>
+  <!-- 말풍선 꼬리 -->
+  <polygon points="140,356 210,356 160,430" fill="white"/>
+  <!-- 체크 마크 -->
+  <polyline points="148,236 218,312 374,158"
+            stroke="#1a1a1a" stroke-width="44"
+            fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

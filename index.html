@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    viewport: 모바일에서 100% 너비로 렌더링, 사용자 확대/축소 허용.
+    maximum-scale을 제한하면 접근성 문제가 생길 수 있어 제한하지 않았습니다.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 홈 화면 추가 및 PWA 관련 메타 -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#EEF2F7" />
+
+  <title>체크아웃 안내 · Checkout Guide</title>
+
+  <!-- PWA 홈 화면 추가: manifest -->
+  <link rel="manifest" href="manifest.json" />
+  <!-- iOS Safari 홈 화면 아이콘 -->
+  <link rel="apple-touch-icon" href="assets/image/icon.svg" />
+  <!-- 파비콘 -->
+  <link rel="icon" href="assets/image/icon.svg" type="image/svg+xml" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!--
+    #app: 모든 화면이 JavaScript로 이 요소 안에 렌더링됩니다.
+    JS가 비활성화된 경우를 위한 안내 메시지도 포함합니다.
+  -->
+  <div id="app">
+    <noscript>
+      <div style="padding:40px;text-align:center;font-size:18px;color:#555;">
+        이 페이지는 JavaScript가 필요합니다.<br>
+        This page requires JavaScript to be enabled.
+      </div>
+    </noscript>
+  </div>
+
+  <!--
+    스크립트 로드 순서 (의존성 순서):
+      1. messages.js  — LANGUAGES, TRANSLATIONS (데이터, 의존성 없음)
+      2. router.js    — SCREENS, navigate, goBack, goHome 등
+      3. ui.js        — renderCurrentScreen, buildScreen* (router + messages 사용)
+      4. app.js       — 진입점: 상태·이벤트 처리 (위 세 파일 모두 사용)
+  -->
+  <script src="assets/data/messages.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>

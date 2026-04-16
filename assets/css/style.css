@@ -1,0 +1,281 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   style.css  —  게스트하우스 체크아웃 안내 웹 앱
+   흰 바탕 · 검은 글자 · 무채색 버튼 · 국기 배경 아이콘
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── 리셋 & 기본 ────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Noto Sans', 'Noto Sans KR',
+    'Noto Sans JP', 'Noto Sans SC', 'Noto Sans Thai',
+    'Noto Sans Devanagari', Arial, sans-serif;
+  background: #fff;
+  min-height: 100vh;
+  color: #111;
+  line-height: 1.65;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+}
+
+/* ── 앱 컨테이너 ─────────────────────────────────────────────────────── */
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 화면 공통 ──────────────────────────────────────────────────────── */
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 40px;
+  animation: screenFadeIn 0.2s ease-out both;
+}
+
+.screen-center {
+  justify-content: center;
+}
+
+@keyframes screenFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ── 내비게이션 바 ───────────────────────────────────────────────────── */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 8px;
+}
+
+.nav-btn {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  white-space: nowrap;
+}
+
+.nav-btn:hover  { background: #f5f5f5; border-color: #999; }
+.nav-btn:active { background: #eee;    transform: scale(0.97); }
+
+.nav-btn-home { margin-left: auto; }
+
+/* ── 언어 선택 화면 ──────────────────────────────────────────────────── */
+.lang-screen {
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.lang-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 언어 버튼: 흰 배경 + 얇은 테두리, 국기를 배경에 옅게 */
+.lang-btn {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border: 1.5px solid #ddd;
+  border-radius: 14px;
+  padding: 16px 12px;
+  min-height: 100px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.12s, background 0.12s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-btn:hover  { border-color: #999; background: #fafafa; }
+.lang-btn:active { background: #f0f0f0; transform: scale(0.96); }
+
+/* 국기 이미지: 버튼을 꽉 채우되 투명하게 — 텍스트가 위에 선명히 보임 */
+.lang-flag-img {
+  position: absolute;
+  inset: 0;               /* top/right/bottom/left: 0 — 버튼 전체를 덮음 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* 비율 유지하며 버튼을 꽉 채움 */
+  object-position: center;
+  opacity: 0.28;
+  border-radius: 13px;    /* 버튼 모서리와 맞춤 */
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 언어 이름: 국기 위에 선명하게 */
+.lang-name {
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* ── 카드 ─────────────────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 22px;
+  margin-bottom: 20px;
+}
+
+.card-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+}
+
+/* ── 화면2: 체크아웃 메시지 ─────────────────────────────────────────── */
+.message-text {
+  font-size: 32px;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.75;
+  text-align: center;
+}
+
+/* ── 화면2: 버튼 그룹 ────────────────────────────────────────────────── */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 모든 액션 버튼: 흰 배경 + 얇은 검은 테두리 */
+.action-btn {
+  width: 100%;
+  min-height: 62px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1.5px solid #222;
+  background: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  color: #111;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  transition: background 0.12s, transform 0.1s;
+}
+
+.action-btn:hover  { background: #f5f5f5; }
+.action-btn:active { background: #eee; transform: scale(0.97); }
+
+/* btn-green / btn-blue / btn-orange 클래스는 색 없이 동일하게 처리 */
+.btn-green, .btn-blue, .btn-orange { /* 색 없음 — 모두 동일 */ }
+
+/* ── 화면3 공통: 응답 카드 ───────────────────────────────────────────── */
+.response-card {
+  /* 색 없는 심플 카드 — 테두리만 */
+}
+
+.response-card--green  { /* 색 없음 */ }
+.response-card--orange { /* 색 없음 */ }
+
+.response-emoji {
+  font-size: 52px;
+  margin-bottom: 16px;
+  display: block;
+  line-height: 1;
+}
+
+.response-text {
+  font-size: 20px;
+  color: #111;
+  line-height: 1.8;
+}
+
+.response-text--large {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* ── 화면3B: 연장 안내 상세 ─────────────────────────────────────────── */
+.response-intro {
+  font-size: 19px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+/* 강조 박스: 3가지 상황 안내 — 흰 배경 + 왼쪽 검은 테두리 */
+.bullet-box {
+  list-style: none;
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 16px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 16px;
+  color: #111;
+  line-height: 1.65;
+}
+
+.bullet-dash {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: #111;
+  margin-top: 1px;
+}
+
+.response-outro {
+  font-size: 17px;
+  color: #111;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* ── 반응형: 넓은 화면에서 카드처럼 보이게 ────────────────────────── */
+@media (min-width: 480px) {
+  body { background: #f0f0f0; padding: 16px 0; }
+  #app {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    min-height: calc(100vh - 32px);
+    background: #fff;
+  }
+}

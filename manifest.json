@@ -1,0 +1,19 @@
+{
+  "name": "체크아웃 안내",
+  "short_name": "체크아웃",
+  "description": "게스트하우스 청소 직원용 다국어 체크아웃 안내 도구",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "assets/image/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
