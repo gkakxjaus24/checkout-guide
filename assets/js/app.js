@@ -74,26 +74,36 @@ function handleAction(event) {
     }
 
     // ── 화면2 세 가지 버튼 ─────────────────────────────────────────
-    // 누른 버튼의 문구를 먼저 음성으로 읽고, 이어서 결과 화면의 안내문을
-    // 끊지 않고 이어 읽습니다(speech.js의 큐 이어읽기 예약).
-    case 'btn1':
-      speakText(t().screen2.btn1, getLang());
-      queueNextSpeechAsContinuation();
-      navigate(SCREENS.SCREEN3A);
-      break;
-    case 'btn2':
-      speakText(t().screen2.btn2, getLang());
-      queueNextSpeechAsContinuation();
-      navigate(SCREENS.SCREEN3B);
-      break;
-    case 'btn3':
-      speakText(t().screen2.btn3, getLang());
-      queueNextSpeechAsContinuation();
-      navigate(SCREENS.SCREEN3C);
-      break;
+    case 'btn1': speakChoiceAndNavigate(t().screen2.btn1, SCREENS.SCREEN3A); break;
+    case 'btn2': speakChoiceAndNavigate(t().screen2.btn2, SCREENS.SCREEN3B); break;
+    case 'btn3': speakChoiceAndNavigate(t().screen2.btn3, SCREENS.SCREEN3C); break;
 
     // ── 내비게이션 버튼 ────────────────────────────────────────────
     case 'back': goBack();  break;
     case 'home': goHome();  break;
+  }
+}
+
+/**
+ * 화면2의 선택지 버튼(btn1/2/3) 공통 처리.
+ * 누른 버튼의 문구를 먼저 음성으로 읽고, 결과 화면으로 이동합니다.
+ * 결과 화면의 안내문은 곧바로 이어붙이지 않고, 버튼 문구 음성이 끝난 뒤
+ * 텀을 두고 재생되도록 예약합니다(speech.js의 이어읽기 큐).
+ * 두 문장이 바로 붙어 나오면 어색해서 텀을 둡니다.
+ * @param {string} label - t().screen2.btnN
+ * @param {string} targetScreen - SCREENS 상수
+ */
+function speakChoiceAndNavigate(label, targetScreen) {
+  const utterance = speakText(label, getLang());
+  queueNextSpeechAsContinuation();
+  navigate(targetScreen);
+
+  if (utterance) {
+    const token = getPendingSpeechToken();
+    const playContinuation = () => {
+      setTimeout(() => runPendingContinuation(token), SPEECH_CONTINUATION_DELAY_MS);
+    };
+    utterance.onend = playContinuation;
+    utterance.onerror = playContinuation; // 라벨 음성이 실패해도 결과 안내는 이어서 재생
   }
 }
