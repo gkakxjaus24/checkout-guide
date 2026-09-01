@@ -7,6 +7,7 @@
  * 의존성: router.js (SCREENS, getCurrentScreen, canGoBack)
  *         app.js    (t — 현재 언어 번역 객체 반환 함수)
  *         messages.js (LANGUAGES)
+ *         speech.js (speakScreen — 화면 전환 시 음성 안내)
  * ─────────────────────────────────────────────────────────────────────
  */
 
@@ -33,6 +34,8 @@ function renderCurrentScreen() {
     // innerHTML 교체 → CSS animation(.screen)이 자동으로 재생됩니다.
     // 주의: 여기에 삽입되는 모든 텍스트는 messages.js에서 온 신뢰된 데이터입니다.
     appEl.innerHTML = builder();
+    // 화면이 바뀔 때마다 안내 문구를 음성으로 읽어줍니다. (speech.js)
+    speakScreen(screen);
   }
 }
 

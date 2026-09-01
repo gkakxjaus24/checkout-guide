@@ -7,8 +7,9 @@
  * 로드 순서 (index.html 기준):
  *   1. messages.js  → LANGUAGES, TRANSLATIONS
  *   2. router.js    → SCREENS, navigate, goBack, goHome, …
- *   3. ui.js        → renderCurrentScreen, buildScreen*, …
- *   4. app.js       → (현재 파일) 앱 초기화 및 이벤트 처리
+ *   3. speech.js    → speakText, queueNextSpeechAsContinuation, …
+ *   4. ui.js        → renderCurrentScreen, buildScreen*, …
+ *   5. app.js       → (현재 파일) 앱 초기화 및 이벤트 처리
  * ─────────────────────────────────────────────────────────────────────
  */
 
@@ -72,9 +73,23 @@ function handleAction(event) {
     }
 
     // ── 화면2 세 가지 버튼 ─────────────────────────────────────────
-    case 'btn1': navigate(SCREENS.SCREEN3A); break;
-    case 'btn2': navigate(SCREENS.SCREEN3B); break;
-    case 'btn3': navigate(SCREENS.SCREEN3C); break;
+    // 누른 버튼의 문구를 먼저 음성으로 읽고, 이어서 결과 화면의 안내문을
+    // 끊지 않고 이어 읽습니다(speech.js의 큐 이어읽기 예약).
+    case 'btn1':
+      speakText(t().screen2.btn1, getLang());
+      queueNextSpeechAsContinuation();
+      navigate(SCREENS.SCREEN3A);
+      break;
+    case 'btn2':
+      speakText(t().screen2.btn2, getLang());
+      queueNextSpeechAsContinuation();
+      navigate(SCREENS.SCREEN3B);
+      break;
+    case 'btn3':
+      speakText(t().screen2.btn3, getLang());
+      queueNextSpeechAsContinuation();
+      navigate(SCREENS.SCREEN3C);
+      break;
 
     // ── 내비게이션 버튼 ────────────────────────────────────────────
     case 'back': goBack();  break;
