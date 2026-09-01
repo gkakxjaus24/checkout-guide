@@ -101,9 +101,9 @@ function buildScreen2() {
       </div>
       <div class="btn-group" role="group">
         ${choiceButton('btn1', 'btn-green',  s2.btn1)}
+        ${choiceButton('btn4', 'btn-purple', s2.btn4)}
         ${choiceButton('btn2', 'btn-blue',   s2.btn2)}
         ${choiceButton('btn3', 'btn-orange', s2.btn3)}
-        ${choiceButton('btn4', 'btn-purple', s2.btn4)}
       </div>
     </div>`;
 }
