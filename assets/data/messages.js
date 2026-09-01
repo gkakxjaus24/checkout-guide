@@ -65,7 +65,7 @@ const TRANSLATIONS = {
       message: '죄송합니다. 뭔가 착오가 있는 것 같네요.\n예약정보화면을 보여주시겠어요?\n매니저에게 확인해보겠습니다 :)',
     },
     screen3d: {
-      message: '알겠습니다.\n청소를 할 수 있게 현재 객실을 최대한 빨리 비우는데 협조해주시면 감사하겠습니다.',
+      message: '청소를 시작할 수 있도록 가능한 한 빨리 객실(침대)을 비워주시면 감사하겠습니다.',
       note: '(체크인 3시부터 가능)',
     },
     nav: { back: '← 이전으로', home: '↺ 처음으로' },
@@ -99,7 +99,7 @@ const TRANSLATIONS = {
       message: "I'm sorry, there seems to be some confusion.\nCould you please show me your reservation details?\nI will check with the manager :)",
     },
     screen3d: {
-      message: "Understood.\nWe'd appreciate it if you could vacate your current room as soon as possible so we can clean it.",
+      message: 'Please leave your room (bed) as soon as possible so we can start cleaning. Thank you.',
       note: '(Check-in available from 3 PM)',
     },
     nav: { back: '← Back', home: '↺ Home' },
@@ -133,7 +133,7 @@ const TRANSLATIONS = {
       message: '非常抱歉，好像有些误会。\n能给我看一下您的预订信息吗？\n我会向经理确认的 :)',
     },
     screen3d: {
-      message: '好的。\n为了方便打扫，请您尽快腾出现在的房间，非常感谢您的配合。',
+      message: '为了方便我们开始清洁，请尽早离开房间（床位）。谢谢您的配合。',
       note: '（下午3点后可办理入住）',
     },
     nav: { back: '← 返回', home: '↺ 首页' },
@@ -167,7 +167,7 @@ const TRANSLATIONS = {
       message: '申し訳ありません。何か誤りがあるようです。\n予約情報の画面を見せていただけますか？\nマネージャーに確認いたします :)',
     },
     screen3d: {
-      message: 'かしこまりました。\n清掃ができるよう、現在のお部屋をできるだけ早く空けていただけますと助かります。',
+      message: '清掃を始められるよう、できるだけ早めにお部屋（ベッド）を空けていただけますと幸いです。',
       note: '(チェックインは15時から可能です)',
     },
     nav: { back: '← 戻る', home: '↺ はじめに' },
@@ -201,7 +201,7 @@ const TRANSLATIONS = {
       message: 'Извините, кажется, произошла ошибка.\nНе могли бы вы показать информацию о бронировании?\nЯ уточню у менеджера :)',
     },
     screen3d: {
-      message: 'Понял(а).\nБудем признательны, если вы освободите текущий номер как можно скорее, чтобы мы могли его убрать.',
+      message: 'Пожалуйста, освободите номер (кровать) как можно скорее, чтобы мы могли начать уборку. Спасибо.',
       note: '(Заселение возможно с 15:00)',
     },
     nav: { back: '← Назад', home: '↺ Начало' },
@@ -235,7 +235,7 @@ const TRANSLATIONS = {
       message: 'Lo siento, parece que hay alguna confusión.\n¿Podría mostrarme su información de reserva?\nLo verificaré con el gerente :)',
     },
     screen3d: {
-      message: 'Entendido.\nLe agradeceríamos que desocupe su habitación actual lo antes posible para que podamos limpiarla.',
+      message: 'Por favor, deje libre la habitación (cama) lo antes posible para que podamos empezar a limpiar. Gracias.',
       note: '(Check-in disponible desde las 3 PM)',
     },
     nav: { back: '← Atrás', home: '↺ Inicio' },
@@ -269,7 +269,7 @@ const TRANSLATIONS = {
       message: 'ขอโทษนะครับ/ค่ะ ดูเหมือนจะมีความเข้าใจผิด\nช่วยแสดงข้อมูลการจองให้ดูได้ไหม?\nจะไปถามผู้จัดการให้นะครับ/ค่ะ :)',
     },
     screen3d: {
-      message: 'เข้าใจแล้วครับ/ค่ะ\nเราจะขอบคุณมากหากคุณสามารถออกจากห้องปัจจุบันโดยเร็วที่สุดเพื่อให้เราทำความสะอาดได้',
+      message: 'กรุณาออกจากห้อง (เตียง) โดยเร็วที่สุด เพื่อให้เราเริ่มทำความสะอาดได้ ขอบคุณสำหรับความร่วมมือ',
       note: '(เช็คอินได้ตั้งแต่ 15:00 น.)',
     },
     nav: { back: '← ย้อนกลับ', home: '↺ หน้าแรก' },
@@ -303,7 +303,7 @@ const TRANSLATIONS = {
       message: 'माफ़ कीजिए, लगता है कुछ गलतफहमी हो गई है।\nक्या आप अपनी बुकिंग की जानकारी दिखा सकते/सकती हैं?\nमैं मैनेजर से पूछ लेता/लेती हूं :)',
     },
     screen3d: {
-      message: 'समझ गया।\nसफाई हो सके इसके लिए कृपया अपना मौजूदा कमरा जल्द से जल्द खाली करने में सहयोग करें, हम आभारी रहेंगे।',
+      message: 'कृपया कमरा (बेड) जल्द से जल्द खाली कर दें, ताकि हम सफाई शुरू कर सकें। धन्यवाद।',
       note: '(चेक-इन दोपहर 3 बजे से संभव है)',
     },
     nav: { back: '← वापस', home: '↺ शुरू' },
@@ -337,7 +337,7 @@ const TRANSLATIONS = {
       message: 'Уучлаарай, ямар нэгэн будлиан гарсан бололтой.\nЗахиалгын мэдээллээ үзүүлж болох уу?\nМенежертэй лавлаж үзье :)',
     },
     screen3d: {
-      message: 'Ойлголоо.\nЦэвэрлэгээ хийх боломжтой байхын тулд одоогийн өрөөгөө аль болох хурдан хоослоход тань талархах болно.',
+      message: 'Цэвэрлэгээг эхлүүлэхийн тулд өрөө (ор)-өө аль болох хурдан чөлөөлж өгнө үү. Баярлалаа.',
       note: '(Бүртгэл 15:00 цагаас боломжтой)',
     },
     nav: { back: '← Буцах', home: '↺ Эхлэл' },
@@ -371,7 +371,7 @@ const TRANSLATIONS = {
       message: 'Xin lỗi, hình như có sự nhầm lẫn nào đó.\nBạn có thể cho tôi xem thông tin đặt phòng không?\nTôi sẽ xác nhận với quản lý :)',
     },
     screen3d: {
-      message: 'Đã hiểu.\nChúng tôi rất mong quý khách dọn trống phòng hiện tại sớm nhất có thể để chúng tôi tiến hành dọn dẹp.',
+      message: 'Vui lòng rời phòng (giường) sớm nhất có thể để chúng tôi bắt đầu dọn dẹp. Xin cảm ơn.',
       note: '(Nhận phòng từ 15:00)',
     },
     nav: { back: '← Quay lại', home: '↺ Trang chủ' },
@@ -405,7 +405,7 @@ const TRANSLATIONS = {
       message: "Désolé(e), il semble y avoir une confusion.\nPourriez-vous me montrer les détails de votre réservation ?\nJe vais vérifier avec le responsable :)",
     },
     screen3d: {
-      message: "Compris.\nNous vous serions reconnaissants de bien vouloir libérer votre chambre actuelle dès que possible afin que nous puissions la nettoyer.",
+      message: 'Merci de libérer votre chambre (lit) dès que possible afin que nous puissions commencer le ménage.',
       note: '(Enregistrement possible à partir de 15h00)',
     },
     nav: { back: '← Retour', home: '↺ Accueil' },
@@ -439,7 +439,7 @@ const TRANSLATIONS = {
       message: 'Entschuldigung, es scheint ein Missverständnis zu geben.\nKönnten Sie mir bitte Ihre Reservierungsdetails zeigen?\nIch werde das mit dem Manager klären :)',
     },
     screen3d: {
-      message: 'Verstanden.\nWir wären Ihnen dankbar, wenn Sie Ihr aktuelles Zimmer so schnell wie möglich räumen könnten, damit wir es reinigen können.',
+      message: 'Bitte geben Sie Ihr Zimmer (Bett) so bald wie möglich frei, damit wir mit der Reinigung beginnen können. Vielen Dank.',
       note: '(Check-in ab 15:00 Uhr möglich)',
     },
     nav: { back: '← Zurück', home: '↺ Start' },
@@ -473,7 +473,7 @@ const TRANSLATIONS = {
       message: 'عذراً، يبدو أن هناك بعض الالتباس.\nهل يمكنك أن تريني تفاصيل حجزك؟\nسأتحقق مع المدير :)',
     },
     screen3d: {
-      message: 'مفهوم.\nسنكون ممتنين لو تفضلتم بإخلاء غرفتكم الحالية في أقرب وقت ممكن حتى نتمكن من تنظيفها.',
+      message: 'يرجى إخلاء الغرفة (السرير) في أقرب وقت ممكن حتى نتمكن من بدء التنظيف. شكرًا لتعاونكم.',
       note: '(تسجيل الوصول متاح من الساعة 3:00 مساءً)',
     },
     nav: { back: '← رجوع', home: '↺ الرئيسية' },
@@ -507,7 +507,7 @@ const TRANSLATIONS = {
       message: 'Üzgünüm, bir yanlış anlaşılma var gibi görünüyor.\nRezervasyon bilgilerinizi gösterebilir misiniz?\nYöneticiyle kontrol edeceğim :)',
     },
     screen3d: {
-      message: 'Anlaşıldı.\nTemizlik yapabilmemiz için mevcut odanızı en kısa sürede boşaltırsanız memnun oluruz.',
+      message: 'Temizliğe başlayabilmemiz için lütfen odanızı (yatağınızı) mümkün olduğunca erken boşaltın. Teşekkür ederiz.',
       note: "(Giriş saat 15:00'ten itibaren mümkündür)",
     },
     nav: { back: '← Geri', home: '↺ Ana Sayfa' },
@@ -541,7 +541,7 @@ const TRANSLATIONS = {
       message: 'සමාවෙන්න, යම් ව්‍යාකූලත්වයක් ඇති බව පෙනේ.\nඔබේ වෙන්කිරීමේ තොරතුරු පෙන්විය හැකිද?\nපරිපාලක සමඟ පරීක්ෂා කරන්නම් :)',
     },
     screen3d: {
-      message: 'තේරුණා.\nපිරිසිදු කිරීමට හැකි වන පරිදි ඔබගේ වත්මන් කාමරය හැකි ඉක්මනින් හිස් කිරීමට කරුණාකර සහාය වන්න.',
+      message: 'පිරිසිදු කිරීම ආරම්භ කිරීමට කරුණාකර කාමරය (ඇඳ) හැකි ඉක්මනින් හිස් කර දෙන්න. ස්තූතියි.',
       note: '(පස්වරු 3 සිට ලියාපදිංචි විය හැක)',
     },
     nav: { back: '← ආපසු', home: '↺ මුල් පිටුව' },
@@ -575,7 +575,7 @@ const TRANSLATIONS = {
       message: 'Maaf, sepertinya ada kesalahpahaman.\nBisakah Anda menunjukkan detail pemesanan Anda?\nSaya akan periksa dengan manajer :)',
     },
     screen3d: {
-      message: 'Baik.\nKami akan sangat berterima kasih jika Anda dapat mengosongkan kamar Anda saat ini sesegera mungkin agar kami bisa membersihkannya.',
+      message: 'Mohon kosongkan kamar (tempat tidur) secepat mungkin agar kami dapat mulai membersihkan. Terima kasih.',
       note: '(Check-in tersedia mulai pukul 15:00)',
     },
     nav: { back: '← Kembali', home: '↺ Beranda' },
