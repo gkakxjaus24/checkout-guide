@@ -158,9 +158,7 @@ function speakScreen(screenName) {
     case SCREENS.SCREEN2:
       text = tr.screen2.message;
       break;
-    case SCREENS.SCREEN3A:
-      text = tr.screen3a.message;
-      break;
+    // SCREEN3A("감사합니다")는 버튼1 라벨 음성만으로 충분해 안내 음성을 재생하지 않습니다.
     case SCREENS.SCREEN3B:
       // 화면3B는 intro(청소직원이 도와줄 수 없다는 안내)만 읽습니다.
       // 불릿 목록·outro는 화면에는 표시되지만 음성으로는 읽지 않습니다.
