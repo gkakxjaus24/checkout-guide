@@ -47,6 +47,18 @@ function queueNextSpeechAsContinuation() {
 }
 
 /**
+ * 화면2 안내문은 언어 선택 직후 첫 진입 때 한 번만 읽습니다.
+ * 버튼을 눌러 다른 화면으로 갔다가 뒤로가기로 화면2에 돌아와도
+ * 다시 읽지 않습니다. 언어를 새로 선택하면(app.js의 select-lang) 초기화됩니다.
+ */
+let _screen2Spoken = false;
+
+/** 화면2를 "아직 안 읽음" 상태로 되돌립니다. 언어를 새로 선택할 때 호출합니다. */
+function resetScreen2SpeechFlag() {
+  _screen2Spoken = false;
+}
+
+/**
  * 주어진 텍스트를 지정한 언어로 읽습니다.
  * @param {string} text
  * @param {string} langCode - messages.js의 언어 코드 (예: 'ko', 'vi')
@@ -82,6 +94,13 @@ function speakScreen(screenName) {
 
   switch (screenName) {
     case SCREENS.SCREEN2:
+      if (_screen2Spoken) {
+        // 이미 한 번 읽은 화면2에 재방문한 경우: 새로 읽지 않고,
+        // 재생 중이던 이전 화면 음성만 멈춥니다.
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        return;
+      }
+      _screen2Spoken = true;
       text = tr.screen2.message;
       break;
     case SCREENS.SCREEN3A:
