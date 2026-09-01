@@ -65,6 +65,32 @@ function resetSpeechFlags() {
 }
 
 /**
+ * 화면을 "이미 읽음" 상태로 표시합니다. speakScreen()을 직접 거치지 않고
+ * 다른 경로로 이미 그 화면 문구를 읽어준 경우(예: 언어 선택 화면의 재생바
+ * 안내음성이 화면2 문구를 미리 읽어준 경우) 화면2 진입 시 같은 문구를
+ * 중복 재생하지 않도록 app.js에서 호출합니다.
+ * @param {string} screenName - SCREENS 상수 중 하나
+ */
+function markScreenAsSpoken(screenName) {
+  _spokenScreens.add(screenName);
+}
+
+/**
+ * 텍스트를 다 읽는 데 걸릴 대략적인 시간(ms)을 추정합니다.
+ * TTS 엔진은 재생 전 정확한 길이를 알려주지 않으므로, 재생바 애니메이션의
+ * 목표 시간으로 쓸 대략치입니다. 실제 음성이 끝나는 시점(onend)에 맞춰
+ * 재생바를 즉시 100%로 스냅하므로, 이 추정이 다소 어긋나도 "음성이 끝나는
+ * 순간 = 바가 다 차는 순간"이라는 결과는 항상 정확합니다.
+ * @param {string} text
+ * @returns {number} 추정 시간(ms), 900~6000 사이로 제한
+ */
+function estimateSpeechDurationMs(text) {
+  const charCount = String(text).replace(/\s/g, '').length;
+  const msPerChar = 90; // 대략적인 평균 발화 속도
+  return Math.min(6000, Math.max(900, charCount * msPerChar));
+}
+
+/**
  * "이어 읽기"로 예약된, 아직 재생하지 않은 다음 발화.
  * 버튼 라벨 음성이 끝나면 이 내용을 SPEECH_CONTINUATION_DELAY_MS 뒤에 재생합니다.
  * 토큰(token)으로 어느 예약 건인지 구분해, 그 사이에 다른 동작으로 무효화된
