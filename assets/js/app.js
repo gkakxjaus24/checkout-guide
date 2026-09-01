@@ -93,6 +93,12 @@ function handleAction(event) {
 let _choiceIntroState = null; // { track, fill, safetyTimeout, token }
 let _choiceIntroToken = 0;
 
+// 실제 음성이 끝나기(onend) 전까지 재생바가 도달할 수 있는 최대치.
+// 100%로 잡으면 시간 추정이 실제보다 짧을 때 "바는 다 찼는데 음성은
+// 계속 나오는" 어색한 상태가 생기므로, 추정이 틀려도 안전하게 여기서
+// 멈춰 기다리다가 음성이 끝나는 순간에만 100%로 채웁니다.
+const CHOICE_PROGRESS_CAP_PERCENT = 92;
+
 /**
  * 화면2의 선택지 버튼(btn1~4)을 눌렀을 때 호출됩니다. 결과 화면으로 바로
  * 넘어가지 않고, 눌린 버튼 안의 재생바를 그 버튼 문구 음성 길이에 맞춰
@@ -140,19 +146,25 @@ function speakChoiceAndNavigate(label, targetScreen, buttonEl) {
   const utterance = speakText(label, getLang());
 
   // 재생바는 다음 프레임부터 채우기 시작합니다(같은 프레임에서 폭을
-  // 0%→100%로 바꾸면 브라우저가 transition을 생략할 수 있어 한 프레임 늦춥니다).
+  // 0%→목표치로 바꾸면 브라우저가 transition을 생략할 수 있어 한 프레임 늦춥니다).
+  // 음성이 있는 경우 CAP까지만 채우고, 실제 onend에서 finish()가 100%로
+  // 마무리합니다. 음성이 아예 없는 환경(utterance === null)은 끝을 알려줄
+  // onend가 없으므로 처음부터 100%를 목표로 채웁니다.
   requestAnimationFrame(() => {
     if (!_choiceIntroState || _choiceIntroState.token !== myToken) return; // 그 사이 취소/교체됨
     fill.classList.add('is-animating');
     fill.style.transitionDuration = estMs + 'ms';
-    fill.style.width = '100%';
+    fill.style.width = (utterance ? CHOICE_PROGRESS_CAP_PERCENT : 100) + '%';
   });
 
   if (utterance) {
     utterance.onend = finish;
     utterance.onerror = finish;
-    // 안전망: 어떤 이유로 onend가 오지 않아도 예상 시간 뒤엔 다음 화면으로 넘어갑니다.
-    _choiceIntroState.safetyTimeout = setTimeout(finish, estMs + 1500);
+    // 안전망: onend가 영영 오지 않는 극단적 상황(브라우저/엔진 결함)에 대비한
+    // 최후의 방어선일 뿐이라, 실제 음성 재생 중에는 절대 먼저 발동하면 안
+    // 됩니다. estMs는 실제보다 느리게 잡은 추정치인데도 실제 발화가 그보다
+    // 더 오래 걸리는 경우가 흔해, 넉넉하게 여유를 둡니다.
+    _choiceIntroState.safetyTimeout = setTimeout(finish, estMs * 3 + 4000);
   } else {
     // TTS 미지원 환경: 음성 없이 재생바 애니메이션 시간만큼 보여주고 넘어갑니다.
     _choiceIntroState.safetyTimeout = setTimeout(finish, estMs);

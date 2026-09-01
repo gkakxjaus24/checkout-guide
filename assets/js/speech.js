@@ -67,16 +67,17 @@ function resetSpeechFlags() {
 /**
  * 텍스트를 다 읽는 데 걸릴 대략적인 시간(ms)을 추정합니다.
  * TTS 엔진은 재생 전 정확한 길이를 알려주지 않으므로, 재생바 애니메이션의
- * 목표 시간으로 쓸 대략치입니다. 실제 음성이 끝나는 시점(onend)에 맞춰
- * 재생바를 즉시 100%로 스냅하므로, 이 추정이 다소 어긋나도 "음성이 끝나는
- * 순간 = 바가 다 차는 순간"이라는 결과는 항상 정확합니다.
+ * 목표 시간으로 쓸 대략치입니다. 일부러 넉넉하게(실제보다 느리게) 잡습니다 —
+ * 호출부(app.js)가 이 시간 동안 바를 100%가 아니라 그보다 낮은 상한까지만
+ * 채우고, 실제 음성이 끝나는 시점(onend)에만 100%로 채워 넣기 때문에,
+ * 이 추정이 짧아서 바가 음성보다 먼저 다 차버리는 일이 없습니다.
  * @param {string} text
- * @returns {number} 추정 시간(ms), 900~6000 사이로 제한
+ * @returns {number} 추정 시간(ms), 1200~9000 사이로 제한
  */
 function estimateSpeechDurationMs(text) {
   const charCount = String(text).replace(/\s/g, '').length;
-  const msPerChar = 90; // 대략적인 평균 발화 속도
-  return Math.min(6000, Math.max(900, charCount * msPerChar));
+  const msPerChar = 140; // 대략적인 평균 발화 속도(넉넉하게 느린 쪽으로)
+  return Math.min(9000, Math.max(1200, charCount * msPerChar));
 }
 
 /**
