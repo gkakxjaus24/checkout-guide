@@ -67,7 +67,7 @@ function handleAction(event) {
       const lang = target.dataset.lang;
       if (lang && TRANSLATIONS[lang]) {
         setLang(lang);
-        resetScreen2SpeechFlag(); // 새 언어 선택 시 화면2 안내 음성을 다시 활성화
+        resetSpeechFlags(); // 새 언어 선택 시 모든 화면의 안내 음성을 다시 활성화
         navigate(SCREENS.SCREEN2);
       }
       break;

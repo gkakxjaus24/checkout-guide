@@ -47,15 +47,16 @@ function queueNextSpeechAsContinuation() {
 }
 
 /**
- * 화면2 안내문은 언어 선택 직후 첫 진입 때 한 번만 읽습니다.
- * 버튼을 눌러 다른 화면으로 갔다가 뒤로가기로 화면2에 돌아와도
- * 다시 읽지 않습니다. 언어를 새로 선택하면(app.js의 select-lang) 초기화됩니다.
+ * 각 화면의 안내문은 언어 선택 후 그 화면에 처음 도착했을 때 한 번만 읽습니다.
+ * 뒤로가기 등으로 이미 읽은 화면에 다시 오면 다시 읽지 않습니다.
+ * 언어를 새로 선택하면(app.js의 select-lang) 전부 초기화되어, 다음 손님에게는
+ * 모든 화면이 다시 처음 한 번씩 읽힙니다.
  */
-let _screen2Spoken = false;
+let _spokenScreens = new Set();
 
-/** 화면2를 "아직 안 읽음" 상태로 되돌립니다. 언어를 새로 선택할 때 호출합니다. */
-function resetScreen2SpeechFlag() {
-  _screen2Spoken = false;
+/** 모든 화면을 "아직 안 읽음" 상태로 되돌립니다. 언어를 새로 선택할 때 호출합니다. */
+function resetSpeechFlags() {
+  _spokenScreens.clear();
 }
 
 /**
@@ -89,18 +90,24 @@ function speakScreen(screenName) {
     return;
   }
 
+  // 이번 발화가 직전 발화(버튼 라벨 등)를 끊어야 하는지 여부.
+  // speakScreen 안에서 아래 여러 return 지점이 이 값을 공유해서 씁니다.
+  const interrupt = !_continueSpeechQueue;
+  _continueSpeechQueue = false;
+
+  if (_spokenScreens.has(screenName)) {
+    // 이미 한 번 읽은 화면에 재방문한 경우 새로 읽지 않습니다.
+    // interrupt인 경우(예: 뒤로가기)에만 재생 중이던 이전 화면 음성을 멈추고,
+    // 이어읽기인 경우(예: 방금 시작한 버튼 라벨)는 그대로 재생되게 둡니다.
+    if (interrupt && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    return;
+  }
+
   const tr = t();
   let text = '';
 
   switch (screenName) {
     case SCREENS.SCREEN2:
-      if (_screen2Spoken) {
-        // 이미 한 번 읽은 화면2에 재방문한 경우: 새로 읽지 않고,
-        // 재생 중이던 이전 화면 음성만 멈춥니다.
-        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-        return;
-      }
-      _screen2Spoken = true;
       text = tr.screen2.message;
       break;
     case SCREENS.SCREEN3A:
@@ -118,7 +125,6 @@ function speakScreen(screenName) {
       return;
   }
 
-  const interrupt = !_continueSpeechQueue;
-  _continueSpeechQueue = false;
+  _spokenScreens.add(screenName);
   speakText(text, getLang(), interrupt);
 }
