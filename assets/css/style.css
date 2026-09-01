@@ -143,38 +143,6 @@ button {
   color: #111;
 }
 
-/* 언어 버튼 안내음성 재생바: 평소엔 숨겨져 있다가, 버튼을 누르면
-   음성이 재생되는 동안 회색 바가 왼쪽에서 오른쪽으로 차오릅니다.
-   음성이 끝나는 순간 100%에 도달하고, 그 즉시 화면2로 넘어갑니다. */
-.lang-progress-track {
-  display: none;
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 12px;
-  height: 5px;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 2;
-}
-
-.lang-progress-track.is-active {
-  display: block;
-}
-
-.lang-progress-fill {
-  display: block;
-  width: 0%;
-  height: 100%;
-  border-radius: 3px;
-  background: rgba(17, 17, 17, 0.55);
-}
-
-.lang-progress-fill.is-animating {
-  transition: width linear;
-}
-
 /* ── 카드 ─────────────────────────────────────────────────────────────── */
 .card {
   background: #fff;
@@ -209,6 +177,8 @@ button {
 
 /* 모든 액션 버튼: 흰 배경 + 얇은 검은 테두리 */
 .action-btn {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   min-height: 62px;
   padding: 16px 20px;
@@ -229,6 +199,38 @@ button {
 
 /* btn-green / btn-blue / btn-orange / btn-purple 클래스는 색 없이 동일하게 처리 */
 .btn-green, .btn-blue, .btn-orange, .btn-purple { /* 색 없음 — 모두 동일 */ }
+
+/* 선택지 버튼 안내음성 재생바: 평소엔 숨겨져 있다가, 버튼을 누르면
+   그 버튼 문구의 음성이 재생되는 동안 회색 바가 왼쪽에서 오른쪽으로
+   차오릅니다. 음성이 끝나는 순간 100%에 도달하고, 그 즉시 결과 화면으로
+   넘어갑니다. */
+.btn-progress-track {
+  display: none;
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.btn-progress-track.is-active {
+  display: block;
+}
+
+.btn-progress-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: 2px;
+  background: rgba(17, 17, 17, 0.55);
+}
+
+.btn-progress-fill.is-animating {
+  transition: width linear;
+}
 
 /* ── 화면3 공통: 응답 카드 ───────────────────────────────────────────── */
 .response-card {

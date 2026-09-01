@@ -63,15 +63,10 @@ function buildNavBar() {
 // ── 화면 1: 언어 선택 ─────────────────────────────────────────────────
 function buildLangSelect() {
   // 국기 이미지를 버튼 배경에 옅게 깔고, 언어명은 전면에 표시합니다.
-  // lang-progress-track/fill: 버튼을 누르면 app.js가 여기에 안내음성 재생
-  // 진행률을 채워 넣습니다(평소엔 숨김 상태).
   const buttons = LANGUAGES.map(lang => `
     <button class="lang-btn" data-action="select-lang" data-lang="${lang.code}">
       <img class="lang-flag-img" src="${escHtml(lang.img)}" alt="" aria-hidden="true" />
       <span class="lang-name">${escHtml(lang.name)}</span>
-      <span class="lang-progress-track" data-role="progress-track">
-        <span class="lang-progress-fill" data-role="progress-fill"></span>
-      </span>
     </button>`).join('');
 
   return `
@@ -83,9 +78,20 @@ function buildLangSelect() {
 }
 
 // ── 화면 2: 체크아웃 안내 + 버튼 4개 ─────────────────────────────────
+// 각 버튼 안의 btn-progress-track/fill: 버튼을 누르면 화면은 그대로 두고
+// app.js가 이 안에 그 버튼 문구 음성의 재생 진행률을 채워 넣습니다
+// (평소엔 숨김 상태). 음성이 끝나는 순간 결과 화면으로 넘어갑니다.
 function buildScreen2() {
   const tr = t();
   const s2 = tr.screen2;
+
+  const choiceButton = (action, cls, label) => `
+    <button class="action-btn ${cls}" data-action="${action}">
+      <span class="btn-label">${escHtml(label)}</span>
+      <span class="btn-progress-track" data-role="progress-track">
+        <span class="btn-progress-fill" data-role="progress-fill"></span>
+      </span>
+    </button>`;
 
   return `
     <div class="screen">
@@ -94,18 +100,10 @@ function buildScreen2() {
         <p class="message-text">${nl2br(escHtml(s2.message))}</p>
       </div>
       <div class="btn-group" role="group">
-        <button class="action-btn btn-green" data-action="btn1">
-          ${escHtml(s2.btn1)}
-        </button>
-        <button class="action-btn btn-blue" data-action="btn2">
-          ${escHtml(s2.btn2)}
-        </button>
-        <button class="action-btn btn-orange" data-action="btn3">
-          ${escHtml(s2.btn3)}
-        </button>
-        <button class="action-btn btn-purple" data-action="btn4">
-          ${escHtml(s2.btn4)}
-        </button>
+        ${choiceButton('btn1', 'btn-green',  s2.btn1)}
+        ${choiceButton('btn2', 'btn-blue',   s2.btn2)}
+        ${choiceButton('btn3', 'btn-orange', s2.btn3)}
+        ${choiceButton('btn4', 'btn-purple', s2.btn4)}
       </div>
     </div>`;
 }

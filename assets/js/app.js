@@ -66,67 +66,83 @@ function handleAction(event) {
     case 'select-lang': {
       const lang = target.dataset.lang;
       if (lang && TRANSLATIONS[lang]) {
-        startLangIntro(lang, target);
+        setLang(lang);
+        resetSpeechFlags(); // 새 언어 선택 시 모든 화면의 안내 음성을 다시 활성화
+        navigate(SCREENS.SCREEN2);
       }
       break;
     }
 
     // ── 화면2 네 가지 버튼 ─────────────────────────────────────────
-    case 'btn1': speakChoiceAndNavigate(t().screen2.btn1, SCREENS.SCREEN3A); break;
-    case 'btn2': speakChoiceAndNavigate(t().screen2.btn2, SCREENS.SCREEN3B); break;
-    case 'btn3': speakChoiceAndNavigate(t().screen2.btn3, SCREENS.SCREEN3C); break;
-    case 'btn4': speakChoiceAndNavigate(t().screen2.btn4, SCREENS.SCREEN3D); break;
+    case 'btn1': speakChoiceAndNavigate(t().screen2.btn1, SCREENS.SCREEN3A, target); break;
+    case 'btn2': speakChoiceAndNavigate(t().screen2.btn2, SCREENS.SCREEN3B, target); break;
+    case 'btn3': speakChoiceAndNavigate(t().screen2.btn3, SCREENS.SCREEN3C, target); break;
+    case 'btn4': speakChoiceAndNavigate(t().screen2.btn4, SCREENS.SCREEN3D, target); break;
 
     // ── 내비게이션 버튼 ────────────────────────────────────────────
-    case 'back': goBack();  break;
-    case 'home': goHome();  break;
+    case 'back': cancelChoiceIntro(); goBack(); break;
+    case 'home': cancelChoiceIntro(); goHome(); break;
   }
 }
 
-// ── 언어 선택 화면: 버튼 안 재생바로 안내음성 진행 표시 ────────────────
+// ── 화면2 선택지 버튼: 버튼 안 재생바로 안내음성 진행 표시 ──────────────
 /**
- * 지금 재생 중인 "언어 소개" 상태(버튼 안 재생바 + 음성).
- * 다른 언어 버튼을 누르면 이 상태를 취소하고 새로 시작합니다(cancelLangIntro).
+ * 지금 재생 중인 "선택지 소개" 상태(버튼 안 재생바 + 음성).
+ * 다른 버튼을 누르거나 뒤로가기/홈으로 화면을 벗어나면 이 상태를 취소합니다.
  */
-let _langIntroState = null; // { track, fill, safetyTimeout }
+let _choiceIntroState = null; // { track, fill, safetyTimeout, token }
+let _choiceIntroToken = 0;
 
 /**
- * 언어 버튼을 눌렀을 때 호출됩니다. 화면2로 바로 넘어가지 않고, 눌린 버튼
- * 안의 재생바를 화면2 안내음성 길이에 맞춰 채우면서 음성을 재생합니다.
- * 음성이 끝나는 순간 재생바도 100%에 도달하고, 그 즉시 화면2로 넘어갑니다.
- * @param {string} lang - messages.js의 언어 코드
- * @param {HTMLElement} buttonEl - 클릭된 .lang-btn 요소
+ * 화면2의 선택지 버튼(btn1~4)을 눌렀을 때 호출됩니다. 결과 화면으로 바로
+ * 넘어가지 않고, 눌린 버튼 안의 재생바를 그 버튼 문구 음성 길이에 맞춰
+ * 채우면서 음성을 재생합니다. 음성이 끝나는 순간 재생바도 100%에 도달하고,
+ * 그 즉시 결과 화면으로 넘어갑니다.
+ *
+ * 결과 화면의 안내문은 곧바로 이어붙이지 않고, 이 버튼 문구 음성이 끝난 뒤
+ * (=화면 전환 직후) 텀을 두고 재생되도록 예약합니다(speech.js의 이어읽기 큐).
+ * 두 문장이 바로 붙어 나오면 어색해서 텀을 둡니다.
+ *
+ * @param {string} label - t().screen2.btnN
+ * @param {string} targetScreen - SCREENS 상수
+ * @param {HTMLElement} buttonEl - 클릭된 .action-btn 요소
  */
-function startLangIntro(lang, buttonEl) {
-  cancelLangIntro(); // 재생 중이던 다른 언어 소개가 있으면 취소하고 새로 시작합니다.
-
-  setLang(lang);
-  resetSpeechFlags();
+function speakChoiceAndNavigate(label, targetScreen, buttonEl) {
+  cancelChoiceIntro(); // 재생 중이던 다른 선택지 소개가 있으면 취소하고 새로 시작합니다.
 
   const track = buttonEl.querySelector('[data-role="progress-track"]');
   const fill  = buttonEl.querySelector('[data-role="progress-fill"]');
-  const text  = t().screen2.message;
 
   track.classList.add('is-active');
-  _langIntroState = { track, fill, safetyTimeout: null };
+  _choiceIntroToken++;
+  const myToken = _choiceIntroToken;
+  _choiceIntroState = { track, fill, safetyTimeout: null, token: myToken };
 
   const finish = () => {
-    if (_langIntroState) clearTimeout(_langIntroState.safetyTimeout);
-    _langIntroState = null;
+    // 이 사이에 취소되거나 다른 버튼으로 교체됐다면(cancelChoiceIntro) 무시합니다.
+    // utterance.onend 콜백은 setTimeout과 달리 clearTimeout으로 막을 수 없어
+    // 토큰으로 "지금도 유효한 예약인지"를 직접 확인합니다.
+    if (!_choiceIntroState || _choiceIntroState.token !== myToken) return;
+    clearTimeout(_choiceIntroState.safetyTimeout);
+    _choiceIntroState = null;
     fill.classList.remove('is-animating');
     fill.style.width = '100%';
-    // 화면2 문구는 이 재생바 안내음성으로 이미 읽었으므로, 화면2 진입 시
-    // speakScreen()이 같은 문구를 중복 재생하지 않도록 표시해둡니다.
-    markScreenAsSpoken(SCREENS.SCREEN2);
-    navigate(SCREENS.SCREEN2);
+
+    queueNextSpeechAsContinuation();
+    navigate(targetScreen);
+
+    // 결과 화면 안내문을, 지금 끝난 버튼 라벨 음성 뒤에 텀을 두고 재생합니다.
+    const token = getPendingSpeechToken();
+    setTimeout(() => runPendingContinuation(token), SPEECH_CONTINUATION_DELAY_MS);
   };
 
-  const estMs = estimateSpeechDurationMs(text);
-  const utterance = speakText(text, lang);
+  const estMs = estimateSpeechDurationMs(label);
+  const utterance = speakText(label, getLang());
 
   // 재생바는 다음 프레임부터 채우기 시작합니다(같은 프레임에서 폭을
   // 0%→100%로 바꾸면 브라우저가 transition을 생략할 수 있어 한 프레임 늦춥니다).
   requestAnimationFrame(() => {
+    if (!_choiceIntroState || _choiceIntroState.token !== myToken) return; // 그 사이 취소/교체됨
     fill.classList.add('is-animating');
     fill.style.transitionDuration = estMs + 'ms';
     fill.style.width = '100%';
@@ -136,45 +152,21 @@ function startLangIntro(lang, buttonEl) {
     utterance.onend = finish;
     utterance.onerror = finish;
     // 안전망: 어떤 이유로 onend가 오지 않아도 예상 시간 뒤엔 다음 화면으로 넘어갑니다.
-    _langIntroState.safetyTimeout = setTimeout(finish, estMs + 1500);
+    _choiceIntroState.safetyTimeout = setTimeout(finish, estMs + 1500);
   } else {
     // TTS 미지원 환경: 음성 없이 재생바 애니메이션 시간만큼 보여주고 넘어갑니다.
-    _langIntroState.safetyTimeout = setTimeout(finish, estMs);
+    _choiceIntroState.safetyTimeout = setTimeout(finish, estMs);
   }
 }
 
-/** 재생 중인 언어 소개(재생바 + 음성)를 취소하고 버튼을 원래 상태로 되돌립니다. */
-function cancelLangIntro() {
-  if (_langIntroState) {
-    clearTimeout(_langIntroState.safetyTimeout);
-    _langIntroState.track.classList.remove('is-active');
-    _langIntroState.fill.classList.remove('is-animating');
-    _langIntroState.fill.style.width = '0%';
-    _langIntroState = null;
+/** 재생 중인 선택지 소개(재생바 + 음성)를 취소하고 버튼을 원래 상태로 되돌립니다. */
+function cancelChoiceIntro() {
+  if (_choiceIntroState) {
+    clearTimeout(_choiceIntroState.safetyTimeout);
+    _choiceIntroState.track.classList.remove('is-active');
+    _choiceIntroState.fill.classList.remove('is-animating');
+    _choiceIntroState.fill.style.width = '0%';
+    _choiceIntroState = null;
   }
   cancelSpeech();
-}
-
-/**
- * 화면2의 선택지 버튼(btn1/2/3) 공통 처리.
- * 누른 버튼의 문구를 먼저 음성으로 읽고, 결과 화면으로 이동합니다.
- * 결과 화면의 안내문은 곧바로 이어붙이지 않고, 버튼 문구 음성이 끝난 뒤
- * 텀을 두고 재생되도록 예약합니다(speech.js의 이어읽기 큐).
- * 두 문장이 바로 붙어 나오면 어색해서 텀을 둡니다.
- * @param {string} label - t().screen2.btnN
- * @param {string} targetScreen - SCREENS 상수
- */
-function speakChoiceAndNavigate(label, targetScreen) {
-  const utterance = speakText(label, getLang());
-  queueNextSpeechAsContinuation();
-  navigate(targetScreen);
-
-  if (utterance) {
-    const token = getPendingSpeechToken();
-    const playContinuation = () => {
-      setTimeout(() => runPendingContinuation(token), SPEECH_CONTINUATION_DELAY_MS);
-    };
-    utterance.onend = playContinuation;
-    utterance.onerror = playContinuation; // 라벨 음성이 실패해도 결과 안내는 이어서 재생
-  }
 }
