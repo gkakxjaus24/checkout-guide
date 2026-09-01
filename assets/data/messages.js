@@ -16,14 +16,22 @@
 // ── 언어 선택 버튼에 표시될 목록 (순서 = 버튼 표시 순서) ──────────────
 // flag: 버튼 배경에 옅게 깔리는 아이콘. 영어는 공용어 의미로 지구 🌐 사용.
 const LANGUAGES = [
-  { code: 'ko', name: '한국어',   img: 'assets/image/kr.svg'                  },
-  { code: 'en', name: 'English',  img: 'assets/image/globe.svg'               },
-  { code: 'zh', name: '中文',     img: 'assets/image/cn.svg'                  },
-  { code: 'ja', name: '日本語',   img: 'assets/image/jp.svg'                  },
-  { code: 'ru', name: 'Русский',  img: 'assets/image/Flag_of_Russia.svg.png'  },
-  { code: 'es', name: 'Español',  img: 'assets/image/Bandera_de_España.svg.png' },
-  { code: 'th', name: 'ภาษาไทย', img: 'assets/image/Flag_of_Thailand.svg.png'},
-  { code: 'hi', name: 'हिन्दी',   img: 'assets/image/Flag_of_India.svg.png'   },
+  { code: 'ko', name: '한국어',    img: 'assets/image/kr.svg'                  },
+  { code: 'en', name: 'English',   img: 'assets/image/globe.svg'               },
+  { code: 'zh', name: '中文',      img: 'assets/image/cn.svg'                  },
+  { code: 'ja', name: '日本語',    img: 'assets/image/jp.svg'                  },
+  { code: 'ru', name: 'Русский',   img: 'assets/image/Flag_of_Russia.svg.png'  },
+  { code: 'es', name: 'Español',   img: 'assets/image/Bandera_de_España.svg.png' },
+  { code: 'mn', name: 'Монгол',    img: 'assets/image/mn.svg'                  },
+  { code: 'vi', name: 'Tiếng Việt', img: 'assets/image/vi.svg'                 },
+  { code: 'fr', name: 'Français',  img: 'assets/image/fr.svg'                  },
+  { code: 'de', name: 'Deutsch',   img: 'assets/image/de.svg'                  },
+  { code: 'ar', name: 'العربية',   img: 'assets/image/ar.svg'                  },
+  { code: 'tr', name: 'Türkçe',    img: 'assets/image/tr.svg'                  },
+  { code: 'th', name: 'ภาษาไทย',  img: 'assets/image/Flag_of_Thailand.svg.png'},
+  { code: 'si', name: 'සිංහල',    img: 'assets/image/si.svg'                  },
+  { code: 'hi', name: 'हिन्दी',    img: 'assets/image/Flag_of_India.svg.png'   },
+  { code: 'id', name: 'Indonesia', img: 'assets/image/id.svg'                  },
 ];
 
 // ── 각 언어별 번역 데이터 ─────────────────────────────────────────────
@@ -259,6 +267,238 @@ const TRANSLATIONS = {
       message: 'माफ़ कीजिए, लगता है कुछ गलतफहमी हो गई है।\nक्या आप अपनी बुकिंग की जानकारी दिखा सकते/सकती हैं?\nमैं मैनेजर से पूछ लेता/लेती हूं :)',
     },
     nav: { back: '← वापस', home: '↺ शुरू' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // Монгол
+  // ════════════════════════════════════════════════════════════════════
+  mn: {
+    selectLanguage: 'Хэлээ сонгоно уу',
+    screen2: {
+      message: 'Сайн байна уу.\nБүртгэлээс гарах цаг 11:00 цаг байна.\nГарахад бэлдэнэ үү.',
+      btn1: 'Ойлголоо. Хурдан бэлдэж гарна.',
+      btn2: 'Байрлалаа сунгаж болох уу?',
+      btn3: 'Миний гарах өдөр өнөөдөр биш.',
+    },
+    screen3a: {
+      message: 'Баярлалаа.',
+    },
+    screen3b: {
+      intro: 'Би цэвэрлэгээний ажилтан тул захиалгад тусалж чадахгүй.\nОнлайнаар өөрөө сунгалт хийнэ үү.',
+      bullets: [
+        'Хоосон өрөө байхгүй → Гарахад бэлдэнэ үү',
+        'Ижил өрөө захиалсан → Энд үлдэж болно',
+        'Өөр өрөө захиалсан → Орноо хоослож, 15:00 цагийн дараа дахин бүртгүүлнэ үү',
+      ],
+      outro: '10 минутын дараа дахин шалгахаар ирнэ :)',
+    },
+    screen3c: {
+      message: 'Уучлаарай, ямар нэгэн будлиан гарсан бололтой.\nЗахиалгын мэдээллээ үзүүлж болох уу?\nМенежертэй лавлаж үзье :)',
+    },
+    nav: { back: '← Буцах', home: '↺ Эхлэл' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // Tiếng Việt
+  // ════════════════════════════════════════════════════════════════════
+  vi: {
+    selectLanguage: 'Vui lòng chọn ngôn ngữ',
+    screen2: {
+      message: 'Xin chào.\nGiờ trả phòng là 11:00 sáng.\nVui lòng chuẩn bị trả phòng.',
+      btn1: 'Đã hiểu. Tôi sẽ chuẩn bị và rời đi ngay.',
+      btn2: 'Tôi có thể gia hạn lưu trú không?',
+      btn3: 'Ngày trả phòng của tôi không phải hôm nay.',
+    },
+    screen3a: {
+      message: 'Cảm ơn bạn.',
+    },
+    screen3b: {
+      intro: 'Tôi là nhân viên dọn phòng nên không thể hỗ trợ đặt phòng.\nVui lòng tự gia hạn trực tuyến.',
+      bullets: [
+        'Không còn phòng trống → Vui lòng chuẩn bị trả phòng',
+        'Đặt cùng phòng → Bạn có thể ở lại đây',
+        'Đặt phòng khác → Vui lòng dọn giường và nhận phòng lại sau 15:00',
+      ],
+      outro: 'Tôi sẽ quay lại kiểm tra sau 10 phút :)',
+    },
+    screen3c: {
+      message: 'Xin lỗi, hình như có sự nhầm lẫn nào đó.\nBạn có thể cho tôi xem thông tin đặt phòng không?\nTôi sẽ xác nhận với quản lý :)',
+    },
+    nav: { back: '← Quay lại', home: '↺ Trang chủ' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // Français
+  // ════════════════════════════════════════════════════════════════════
+  fr: {
+    selectLanguage: 'Veuillez sélectionner votre langue',
+    screen2: {
+      message: "Bonjour.\nL'heure de départ est 11h00.\nVeuillez vous préparer à quitter la chambre.",
+      btn1: 'Compris. Je me prépare et je pars bientôt.',
+      btn2: 'Puis-je prolonger mon séjour ?',
+      btn3: "Ma date de départ n'est pas aujourd'hui.",
+    },
+    screen3a: {
+      message: 'Merci.',
+    },
+    screen3b: {
+      intro: "Je suis employé(e) de ménage et je ne peux pas vous aider avec les réservations.\nVeuillez prolonger votre séjour en ligne vous-même.",
+      bullets: [
+        'Aucune chambre disponible → Veuillez vous préparer à partir',
+        'Même chambre réservée → Vous pouvez rester ici',
+        'Autre chambre réservée → Veuillez libérer le lit et vous réenregistrer après 15h00',
+      ],
+      outro: 'Je reviendrai vérifier dans 10 minutes :)',
+    },
+    screen3c: {
+      message: "Désolé(e), il semble y avoir une confusion.\nPourriez-vous me montrer les détails de votre réservation ?\nJe vais vérifier avec le responsable :)",
+    },
+    nav: { back: '← Retour', home: '↺ Accueil' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // Deutsch
+  // ════════════════════════════════════════════════════════════════════
+  de: {
+    selectLanguage: 'Bitte wählen Sie Ihre Sprache',
+    screen2: {
+      message: 'Hallo.\nDie Check-out-Zeit ist 11:00 Uhr.\nBitte bereiten Sie sich auf den Check-out vor.',
+      btn1: 'Verstanden. Ich mache mich schnell fertig und gehe.',
+      btn2: 'Kann ich meinen Aufenthalt verlängern?',
+      btn3: 'Mein Check-out-Datum ist nicht heute.',
+    },
+    screen3a: {
+      message: 'Danke.',
+    },
+    screen3b: {
+      intro: 'Ich bin Reinigungspersonal und kann bei Buchungen nicht helfen.\nBitte verlängern Sie Ihren Aufenthalt selbst online.',
+      bullets: [
+        'Kein Zimmer frei → Bitte bereiten Sie sich auf den Check-out vor',
+        'Gleiches Zimmer gebucht → Sie können hierbleiben',
+        'Anderes Zimmer gebucht → Bitte räumen Sie das Bett und checken Sie nach 15:00 Uhr erneut ein',
+      ],
+      outro: 'Ich komme in 10 Minuten wieder vorbei, um nachzusehen :)',
+    },
+    screen3c: {
+      message: 'Entschuldigung, es scheint ein Missverständnis zu geben.\nKönnten Sie mir bitte Ihre Reservierungsdetails zeigen?\nIch werde das mit dem Manager klären :)',
+    },
+    nav: { back: '← Zurück', home: '↺ Start' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // العربية
+  // ════════════════════════════════════════════════════════════════════
+  ar: {
+    selectLanguage: 'الرجاء اختيار لغتك',
+    screen2: {
+      message: 'مرحباً.\nموعد المغادرة الساعة 11:00 صباحاً.\nيرجى الاستعداد للمغادرة.',
+      btn1: 'مفهوم. سأستعد وأغادر بسرعة.',
+      btn2: 'هل يمكنني تمديد إقامتي؟',
+      btn3: 'تاريخ مغادرتي ليس اليوم.',
+    },
+    screen3a: {
+      message: 'شكراً لك.',
+    },
+    screen3b: {
+      intro: 'أنا موظف تنظيف ولا يمكنني المساعدة في الحجوزات.\nيرجى تمديد إقامتك عبر الإنترنت بنفسك.',
+      bullets: [
+        'لا توجد غرف متاحة ← يرجى الاستعداد للمغادرة',
+        'تم حجز نفس الغرفة ← يمكنك البقاء هنا',
+        'تم حجز غرفة أخرى ← يرجى إخلاء السرير وتسجيل الدخول مرة أخرى بعد الساعة 3:00 مساءً',
+      ],
+      outro: 'سأعود للتحقق بعد 10 دقائق :)',
+    },
+    screen3c: {
+      message: 'عذراً، يبدو أن هناك بعض الالتباس.\nهل يمكنك أن تريني تفاصيل حجزك؟\nسأتحقق مع المدير :)',
+    },
+    nav: { back: '← رجوع', home: '↺ الرئيسية' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // Türkçe
+  // ════════════════════════════════════════════════════════════════════
+  tr: {
+    selectLanguage: 'Lütfen dilinizi seçin',
+    screen2: {
+      message: "Merhaba.\nÇıkış saati 11:00'dir.\nLütfen çıkışa hazırlanın.",
+      btn1: 'Anlaşıldı. Hemen hazırlanıp çıkacağım.',
+      btn2: 'Konaklamamı uzatabilir miyim?',
+      btn3: 'Çıkış tarihim bugün değil.',
+    },
+    screen3a: {
+      message: 'Teşekkür ederim.',
+    },
+    screen3b: {
+      intro: 'Ben temizlik personeliyim, rezervasyon konusunda yardımcı olamam.\nLütfen uzatma işlemini kendiniz çevrimiçi yapın.',
+      bullets: [
+        'Boş oda yok → Lütfen çıkışa hazırlanın',
+        'Aynı oda rezerve edilmiş → Burada kalabilirsiniz',
+        "Başka oda rezerve edilmiş → Lütfen yatağı boşaltın ve 15:00'ten sonra tekrar giriş yapın",
+      ],
+      outro: '10 dakika sonra tekrar kontrol etmeye geleceğim :)',
+    },
+    screen3c: {
+      message: 'Üzgünüm, bir yanlış anlaşılma var gibi görünüyor.\nRezervasyon bilgilerinizi gösterebilir misiniz?\nYöneticiyle kontrol edeceğim :)',
+    },
+    nav: { back: '← Geri', home: '↺ Ana Sayfa' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // සිංහල
+  // ════════════════════════════════════════════════════════════════════
+  si: {
+    selectLanguage: 'කරුණාකර ඔබේ භාෂාව තෝරන්න',
+    screen2: {
+      message: 'ආයුබෝවන්.\nවිත්ති කිරීමේ වේලාව උදේ 11.00 ය.\nකරුණාකර පිටවීමට සූදානම් වන්න.',
+      btn1: 'තේරුණා. මම ඉක්මනින් සූදානම් වී පිටව යන්නම්.',
+      btn2: 'මට නවාතැන කාලය දික් කළ හැකිද?',
+      btn3: 'මගේ පිටවීමේ දිනය අද නොවේ.',
+    },
+    screen3a: {
+      message: 'ස්තුතියි.',
+    },
+    screen3b: {
+      intro: 'මම පිරිසිදු කිරීමේ සේවකයෙක් නිසා වෙන්කිරීම් සම්බන්ධයෙන් උදව් කළ නොහැක.\nකරුණාකර මාර්ගගතව ඔබම කාලය දික් කරගන්න.',
+      bullets: [
+        'හිස් කාමරයක් නැත → කරුණාකර පිටවීමට සූදානම් වන්න',
+        'එම කාමරයම වෙන් කර ඇත → ඔබට මෙහි රැඳී සිටිය හැක',
+        'වෙනත් කාමරයක් වෙන් කර ඇත → කරුණාකර ඇඳ හිස් කර, පස්වරු 3ට පසු නැවත ලියාපදිංචි වන්න',
+      ],
+      outro: 'මිනිත්තු 10කින් නැවත පරීක්ෂා කිරීමට එන්නම් :)',
+    },
+    screen3c: {
+      message: 'සමාවෙන්න, යම් ව්‍යාකූලත්වයක් ඇති බව පෙනේ.\nඔබේ වෙන්කිරීමේ තොරතුරු පෙන්විය හැකිද?\nපරිපාලක සමඟ පරීක්ෂා කරන්නම් :)',
+    },
+    nav: { back: '← ආපසු', home: '↺ මුල් පිටුව' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // Bahasa Indonesia
+  // ════════════════════════════════════════════════════════════════════
+  id: {
+    selectLanguage: 'Silakan pilih bahasa Anda',
+    screen2: {
+      message: 'Halo.\nWaktu check-out adalah pukul 11:00.\nSilakan bersiap untuk check-out.',
+      btn1: 'Baik. Saya akan segera bersiap dan keluar.',
+      btn2: 'Bisakah saya memperpanjang masa inap?',
+      btn3: 'Tanggal check-out saya bukan hari ini.',
+    },
+    screen3a: {
+      message: 'Terima kasih.',
+    },
+    screen3b: {
+      intro: 'Saya staf kebersihan dan tidak bisa membantu dengan pemesanan.\nSilakan perpanjang masa inap Anda secara online sendiri.',
+      bullets: [
+        'Tidak ada kamar kosong → Silakan bersiap untuk check-out',
+        'Kamar yang sama dipesan → Anda bisa tetap di sini',
+        'Kamar lain dipesan → Silakan kosongkan tempat tidur dan check-in kembali setelah pukul 15:00',
+      ],
+      outro: 'Saya akan kembali memeriksa dalam 10 menit :)',
+    },
+    screen3c: {
+      message: 'Maaf, sepertinya ada kesalahpahaman.\nBisakah Anda menunjukkan detail pemesanan Anda?\nSaya akan periksa dengan manajer :)',
+    },
+    nav: { back: '← Kembali', home: '↺ Beranda' },
   },
 
 }; // end TRANSLATIONS
