@@ -47,6 +47,7 @@ const TRANSLATIONS = {
       btn1: '알겠습니다. 빨리 준비해서 나갈게요',
       btn2: '숙박을 연장할 수 있나요?',
       btn3: '저의 퇴실날짜는 오늘이 아닙니다',
+      btn4: '저는 오늘 다른 방으로 옮겨요',
     },
     screen3a: {
       message: '감사합니다.',
@@ -63,6 +64,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: '죄송합니다. 뭔가 착오가 있는 것 같네요.\n예약정보화면을 보여주시겠어요?\n매니저에게 확인해보겠습니다 :)',
     },
+    screen3d: {
+      message: '알겠습니다.\n청소를 할 수 있게 현재 객실을 최대한 빨리 비우는데 협조해주시면 감사하겠습니다.',
+      note: '(체크인 3시부터 가능)',
+    },
     nav: { back: '← 이전으로', home: '↺ 처음으로' },
   },
 
@@ -76,6 +81,7 @@ const TRANSLATIONS = {
       btn1: 'Understood. I will get ready and leave soon.',
       btn2: 'Can I extend my stay?',
       btn3: 'My checkout date is not today.',
+      btn4: "I'm moving to a different room today",
     },
     screen3a: {
       message: 'Thank you.',
@@ -92,6 +98,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: "I'm sorry, there seems to be some confusion.\nCould you please show me your reservation details?\nI will check with the manager :)",
     },
+    screen3d: {
+      message: "Understood.\nWe'd appreciate it if you could vacate your current room as soon as possible so we can clean it.",
+      note: '(Check-in available from 3 PM)',
+    },
     nav: { back: '← Back', home: '↺ Home' },
   },
 
@@ -105,6 +115,7 @@ const TRANSLATIONS = {
       btn1: '好的，我马上收拾行李离开。',
       btn2: '我可以延长住宿吗？',
       btn3: '我的退房日期不是今天。',
+      btn4: '我今天要换到别的房间',
     },
     screen3a: {
       message: '谢谢。',
@@ -121,6 +132,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: '非常抱歉，好像有些误会。\n能给我看一下您的预订信息吗？\n我会向经理确认的 :)',
     },
+    screen3d: {
+      message: '好的。\n为了方便打扫，请您尽快腾出现在的房间，非常感谢您的配合。',
+      note: '（下午3点后可办理入住）',
+    },
     nav: { back: '← 返回', home: '↺ 首页' },
   },
 
@@ -134,6 +149,7 @@ const TRANSLATIONS = {
       btn1: 'わかりました。すぐに準備して出ます。',
       btn2: '宿泊を延長できますか？',
       btn3: 'チェックアウト日は今日ではありません。',
+      btn4: '今日、別の部屋に移ります',
     },
     screen3a: {
       message: 'ありがとうございます。',
@@ -150,6 +166,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: '申し訳ありません。何か誤りがあるようです。\n予約情報の画面を見せていただけますか？\nマネージャーに確認いたします :)',
     },
+    screen3d: {
+      message: 'かしこまりました。\n清掃ができるよう、現在のお部屋をできるだけ早く空けていただけますと助かります。',
+      note: '(チェックインは15時から可能です)',
+    },
     nav: { back: '← 戻る', home: '↺ はじめに' },
   },
 
@@ -163,6 +183,7 @@ const TRANSLATIONS = {
       btn1: 'Понял(а). Быстро соберусь и уйду.',
       btn2: 'Можно ли продлить проживание?',
       btn3: 'Мой день выезда — не сегодня.',
+      btn4: 'Сегодня я перееду в другой номер',
     },
     screen3a: {
       message: 'Спасибо.',
@@ -179,6 +200,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'Извините, кажется, произошла ошибка.\nНе могли бы вы показать информацию о бронировании?\nЯ уточню у менеджера :)',
     },
+    screen3d: {
+      message: 'Понял(а).\nБудем признательны, если вы освободите текущий номер как можно скорее, чтобы мы могли его убрать.',
+      note: '(Заселение возможно с 15:00)',
+    },
     nav: { back: '← Назад', home: '↺ Начало' },
   },
 
@@ -192,6 +217,7 @@ const TRANSLATIONS = {
       btn1: 'Entendido. Me prepararé y saldré pronto.',
       btn2: '¿Puedo extender mi estadía?',
       btn3: 'Mi fecha de salida no es hoy.',
+      btn4: 'Hoy me mudo a otra habitación',
     },
     screen3a: {
       message: 'Gracias.',
@@ -208,6 +234,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'Lo siento, parece que hay alguna confusión.\n¿Podría mostrarme su información de reserva?\nLo verificaré con el gerente :)',
     },
+    screen3d: {
+      message: 'Entendido.\nLe agradeceríamos que desocupe su habitación actual lo antes posible para que podamos limpiarla.',
+      note: '(Check-in disponible desde las 3 PM)',
+    },
     nav: { back: '← Atrás', home: '↺ Inicio' },
   },
 
@@ -221,6 +251,7 @@ const TRANSLATIONS = {
       btn1: 'เข้าใจแล้ว จะรีบเก็บของและออกไปเลย',
       btn2: 'ฉันสามารถต่อเวลาพักได้ไหม?',
       btn3: 'วันเช็คเอาท์ของฉันไม่ใช่วันนี้',
+      btn4: 'วันนี้ฉันจะย้ายไปห้องอื่น',
     },
     screen3a: {
       message: 'ขอบคุณครับ/ค่ะ',
@@ -237,6 +268,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'ขอโทษนะครับ/ค่ะ ดูเหมือนจะมีความเข้าใจผิด\nช่วยแสดงข้อมูลการจองให้ดูได้ไหม?\nจะไปถามผู้จัดการให้นะครับ/ค่ะ :)',
     },
+    screen3d: {
+      message: 'เข้าใจแล้วครับ/ค่ะ\nเราจะขอบคุณมากหากคุณสามารถออกจากห้องปัจจุบันโดยเร็วที่สุดเพื่อให้เราทำความสะอาดได้',
+      note: '(เช็คอินได้ตั้งแต่ 15:00 น.)',
+    },
     nav: { back: '← ย้อนกลับ', home: '↺ หน้าแรก' },
   },
 
@@ -250,6 +285,7 @@ const TRANSLATIONS = {
       btn1: 'समझ गया। मैं जल्दी तैयार होकर निकल जाऊंगा/जाऊंगी।',
       btn2: 'क्या मैं अपना प्रवास बढ़ा सकता/सकती हूं?',
       btn3: 'मेरी चेक-आउट तारीख आज नहीं है।',
+      btn4: 'मैं आज दूसरे कमरे में जा रहा/रही हूं',
     },
     screen3a: {
       message: 'धन्यवाद।',
@@ -266,6 +302,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'माफ़ कीजिए, लगता है कुछ गलतफहमी हो गई है।\nक्या आप अपनी बुकिंग की जानकारी दिखा सकते/सकती हैं?\nमैं मैनेजर से पूछ लेता/लेती हूं :)',
     },
+    screen3d: {
+      message: 'समझ गया।\nसफाई हो सके इसके लिए कृपया अपना मौजूदा कमरा जल्द से जल्द खाली करने में सहयोग करें, हम आभारी रहेंगे।',
+      note: '(चेक-इन दोपहर 3 बजे से संभव है)',
+    },
     nav: { back: '← वापस', home: '↺ शुरू' },
   },
 
@@ -279,6 +319,7 @@ const TRANSLATIONS = {
       btn1: 'Ойлголоо. Хурдан бэлдэж гарна.',
       btn2: 'Байрлалаа сунгаж болох уу?',
       btn3: 'Миний гарах өдөр өнөөдөр биш.',
+      btn4: 'Би өнөөдөр өөр өрөөнд шилжинэ',
     },
     screen3a: {
       message: 'Баярлалаа.',
@@ -295,6 +336,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'Уучлаарай, ямар нэгэн будлиан гарсан бололтой.\nЗахиалгын мэдээллээ үзүүлж болох уу?\nМенежертэй лавлаж үзье :)',
     },
+    screen3d: {
+      message: 'Ойлголоо.\nЦэвэрлэгээ хийх боломжтой байхын тулд одоогийн өрөөгөө аль болох хурдан хоослоход тань талархах болно.',
+      note: '(Бүртгэл 15:00 цагаас боломжтой)',
+    },
     nav: { back: '← Буцах', home: '↺ Эхлэл' },
   },
 
@@ -308,6 +353,7 @@ const TRANSLATIONS = {
       btn1: 'Đã hiểu. Tôi sẽ chuẩn bị và rời đi ngay.',
       btn2: 'Tôi có thể gia hạn lưu trú không?',
       btn3: 'Ngày trả phòng của tôi không phải hôm nay.',
+      btn4: 'Hôm nay tôi chuyển sang phòng khác',
     },
     screen3a: {
       message: 'Cảm ơn bạn.',
@@ -324,6 +370,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'Xin lỗi, hình như có sự nhầm lẫn nào đó.\nBạn có thể cho tôi xem thông tin đặt phòng không?\nTôi sẽ xác nhận với quản lý :)',
     },
+    screen3d: {
+      message: 'Đã hiểu.\nChúng tôi rất mong quý khách dọn trống phòng hiện tại sớm nhất có thể để chúng tôi tiến hành dọn dẹp.',
+      note: '(Nhận phòng từ 15:00)',
+    },
     nav: { back: '← Quay lại', home: '↺ Trang chủ' },
   },
 
@@ -337,6 +387,7 @@ const TRANSLATIONS = {
       btn1: 'Compris. Je me prépare et je pars bientôt.',
       btn2: 'Puis-je prolonger mon séjour ?',
       btn3: "Ma date de départ n'est pas aujourd'hui.",
+      btn4: "Aujourd'hui, je déménage dans une autre chambre",
     },
     screen3a: {
       message: 'Merci.',
@@ -353,6 +404,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: "Désolé(e), il semble y avoir une confusion.\nPourriez-vous me montrer les détails de votre réservation ?\nJe vais vérifier avec le responsable :)",
     },
+    screen3d: {
+      message: "Compris.\nNous vous serions reconnaissants de bien vouloir libérer votre chambre actuelle dès que possible afin que nous puissions la nettoyer.",
+      note: '(Enregistrement possible à partir de 15h00)',
+    },
     nav: { back: '← Retour', home: '↺ Accueil' },
   },
 
@@ -366,6 +421,7 @@ const TRANSLATIONS = {
       btn1: 'Verstanden. Ich mache mich schnell fertig und gehe.',
       btn2: 'Kann ich meinen Aufenthalt verlängern?',
       btn3: 'Mein Check-out-Datum ist nicht heute.',
+      btn4: 'Ich ziehe heute in ein anderes Zimmer um',
     },
     screen3a: {
       message: 'Danke.',
@@ -382,6 +438,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'Entschuldigung, es scheint ein Missverständnis zu geben.\nKönnten Sie mir bitte Ihre Reservierungsdetails zeigen?\nIch werde das mit dem Manager klären :)',
     },
+    screen3d: {
+      message: 'Verstanden.\nWir wären Ihnen dankbar, wenn Sie Ihr aktuelles Zimmer so schnell wie möglich räumen könnten, damit wir es reinigen können.',
+      note: '(Check-in ab 15:00 Uhr möglich)',
+    },
     nav: { back: '← Zurück', home: '↺ Start' },
   },
 
@@ -395,6 +455,7 @@ const TRANSLATIONS = {
       btn1: 'مفهوم. سأستعد وأغادر بسرعة.',
       btn2: 'هل يمكنني تمديد إقامتي؟',
       btn3: 'تاريخ مغادرتي ليس اليوم.',
+      btn4: 'سأنتقل إلى غرفة أخرى اليوم',
     },
     screen3a: {
       message: 'شكراً لك.',
@@ -411,6 +472,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'عذراً، يبدو أن هناك بعض الالتباس.\nهل يمكنك أن تريني تفاصيل حجزك؟\nسأتحقق مع المدير :)',
     },
+    screen3d: {
+      message: 'مفهوم.\nسنكون ممتنين لو تفضلتم بإخلاء غرفتكم الحالية في أقرب وقت ممكن حتى نتمكن من تنظيفها.',
+      note: '(تسجيل الوصول متاح من الساعة 3:00 مساءً)',
+    },
     nav: { back: '← رجوع', home: '↺ الرئيسية' },
   },
 
@@ -424,6 +489,7 @@ const TRANSLATIONS = {
       btn1: 'Anlaşıldı. Hemen hazırlanıp çıkacağım.',
       btn2: 'Konaklamamı uzatabilir miyim?',
       btn3: 'Çıkış tarihim bugün değil.',
+      btn4: 'Bugün başka bir odaya geçiyorum',
     },
     screen3a: {
       message: 'Teşekkür ederim.',
@@ -440,6 +506,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'Üzgünüm, bir yanlış anlaşılma var gibi görünüyor.\nRezervasyon bilgilerinizi gösterebilir misiniz?\nYöneticiyle kontrol edeceğim :)',
     },
+    screen3d: {
+      message: 'Anlaşıldı.\nTemizlik yapabilmemiz için mevcut odanızı en kısa sürede boşaltırsanız memnun oluruz.',
+      note: "(Giriş saat 15:00'ten itibaren mümkündür)",
+    },
     nav: { back: '← Geri', home: '↺ Ana Sayfa' },
   },
 
@@ -453,6 +523,7 @@ const TRANSLATIONS = {
       btn1: 'තේරුණා. මම ඉක්මනින් සූදානම් වී පිටව යන්නම්.',
       btn2: 'මට නවාතැන කාලය දික් කළ හැකිද?',
       btn3: 'මගේ පිටවීමේ දිනය අද නොවේ.',
+      btn4: 'මම අද වෙනත් කාමරයකට මාරු වෙනවා',
     },
     screen3a: {
       message: 'ස්තුතියි.',
@@ -469,6 +540,10 @@ const TRANSLATIONS = {
     screen3c: {
       message: 'සමාවෙන්න, යම් ව්‍යාකූලත්වයක් ඇති බව පෙනේ.\nඔබේ වෙන්කිරීමේ තොරතුරු පෙන්විය හැකිද?\nපරිපාලක සමඟ පරීක්ෂා කරන්නම් :)',
     },
+    screen3d: {
+      message: 'තේරුණා.\nපිරිසිදු කිරීමට හැකි වන පරිදි ඔබගේ වත්මන් කාමරය හැකි ඉක්මනින් හිස් කිරීමට කරුණාකර සහාය වන්න.',
+      note: '(පස්වරු 3 සිට ලියාපදිංචි විය හැක)',
+    },
     nav: { back: '← ආපසු', home: '↺ මුල් පිටුව' },
   },
 
@@ -482,6 +557,7 @@ const TRANSLATIONS = {
       btn1: 'Baik. Saya akan segera bersiap dan keluar.',
       btn2: 'Bisakah saya memperpanjang masa inap?',
       btn3: 'Tanggal check-out saya bukan hari ini.',
+      btn4: 'Hari ini saya pindah ke kamar lain',
     },
     screen3a: {
       message: 'Terima kasih.',
@@ -497,6 +573,10 @@ const TRANSLATIONS = {
     },
     screen3c: {
       message: 'Maaf, sepertinya ada kesalahpahaman.\nBisakah Anda menunjukkan detail pemesanan Anda?\nSaya akan periksa dengan manajer :)',
+    },
+    screen3d: {
+      message: 'Baik.\nKami akan sangat berterima kasih jika Anda dapat mengosongkan kamar Anda saat ini sesegera mungkin agar kami bisa membersihkannya.',
+      note: '(Check-in tersedia mulai pukul 15:00)',
     },
     nav: { back: '← Kembali', home: '↺ Beranda' },
   },

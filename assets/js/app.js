@@ -73,10 +73,11 @@ function handleAction(event) {
       break;
     }
 
-    // ── 화면2 세 가지 버튼 ─────────────────────────────────────────
+    // ── 화면2 네 가지 버튼 ─────────────────────────────────────────
     case 'btn1': speakChoiceAndNavigate(t().screen2.btn1, SCREENS.SCREEN3A); break;
     case 'btn2': speakChoiceAndNavigate(t().screen2.btn2, SCREENS.SCREEN3B); break;
     case 'btn3': speakChoiceAndNavigate(t().screen2.btn3, SCREENS.SCREEN3C); break;
+    case 'btn4': speakChoiceAndNavigate(t().screen2.btn4, SCREENS.SCREEN3D); break;
 
     // ── 내비게이션 버튼 ────────────────────────────────────────────
     case 'back': goBack();  break;

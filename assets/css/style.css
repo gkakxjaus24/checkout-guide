@@ -195,8 +195,8 @@ button {
 .action-btn:hover  { background: #f5f5f5; }
 .action-btn:active { background: #eee; transform: scale(0.97); }
 
-/* btn-green / btn-blue / btn-orange 클래스는 색 없이 동일하게 처리 */
-.btn-green, .btn-blue, .btn-orange { /* 색 없음 — 모두 동일 */ }
+/* btn-green / btn-blue / btn-orange / btn-purple 클래스는 색 없이 동일하게 처리 */
+.btn-green, .btn-blue, .btn-orange, .btn-purple { /* 색 없음 — 모두 동일 */ }
 
 /* ── 화면3 공통: 응답 카드 ───────────────────────────────────────────── */
 .response-card {
@@ -205,6 +205,7 @@ button {
 
 .response-card--green  { /* 색 없음 */ }
 .response-card--orange { /* 색 없음 */ }
+.response-card--purple { /* 색 없음 */ }
 
 .response-emoji {
   font-size: 52px;
@@ -222,6 +223,13 @@ button {
 .response-text--large {
   font-size: 28px;
   font-weight: 700;
+}
+
+/* 화면3D: 본문 아래 작은 보조 안내(음성으로는 읽지 않는 괄호 문구) */
+.response-note {
+  font-size: 15px;
+  color: #666;
+  margin-top: 10px;
 }
 
 /* ── 화면3B: 연장 안내 상세 ─────────────────────────────────────────── */

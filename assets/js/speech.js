@@ -167,6 +167,10 @@ function speakScreen(screenName) {
     case SCREENS.SCREEN3C:
       text = tr.screen3c.message;
       break;
+    case SCREENS.SCREEN3D:
+      // note(체크인 3시부터 가능 등 괄호 문구)는 화면에만 표시하고 읽지 않습니다.
+      text = tr.screen3d.message;
+      break;
     default:
       return;
   }

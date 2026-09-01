@@ -27,6 +27,7 @@ function renderCurrentScreen() {
     [SCREENS.SCREEN3A]    : buildScreen3A,
     [SCREENS.SCREEN3B]    : buildScreen3B,
     [SCREENS.SCREEN3C]    : buildScreen3C,
+    [SCREENS.SCREEN3D]    : buildScreen3D,
   };
 
   const builder = builders[screen];
@@ -76,7 +77,7 @@ function buildLangSelect() {
     </div>`;
 }
 
-// ── 화면 2: 체크아웃 안내 + 버튼 3개 ─────────────────────────────────
+// ── 화면 2: 체크아웃 안내 + 버튼 4개 ─────────────────────────────────
 function buildScreen2() {
   const tr = t();
   const s2 = tr.screen2;
@@ -96,6 +97,9 @@ function buildScreen2() {
         </button>
         <button class="action-btn btn-orange" data-action="btn3">
           ${escHtml(s2.btn3)}
+        </button>
+        <button class="action-btn btn-purple" data-action="btn4">
+          ${escHtml(s2.btn4)}
         </button>
       </div>
     </div>`;
@@ -154,6 +158,24 @@ function buildScreen3C() {
         <p class="response-text">
           ${nl2br(escHtml(tr.screen3c.message))}
         </p>
+      </div>
+    </div>`;
+}
+
+// ── 화면 3D: 버튼4 결과 — 다른 방 이동 안내 ───────────────────────────
+function buildScreen3D() {
+  const tr  = t();
+  const s3d = tr.screen3d;
+
+  return `
+    <div class="screen screen-center">
+      ${buildNavBar()}
+      <div class="card card-center response-card response-card--purple">
+        <span class="response-emoji" aria-hidden="true">🚪</span>
+        <p class="response-text response-text--large">
+          ${nl2br(escHtml(s3d.message))}
+        </p>
+        <p class="response-note">${escHtml(s3d.note)}</p>
       </div>
     </div>`;
 }
