@@ -65,15 +65,6 @@ function speakText(text, langCode, interrupt) {
 }
 
 /**
- * 안내 문구 안의 화살표(→, ←) 기호를 TTS가 자연스럽게 넘어가도록 쉼표로 바꿉니다.
- * (화면3B의 불릿 항목에 쓰입니다. 아랍어는 RTL이라 ← 방향을 씁니다.
- * 화면에 보이는 텍스트 자체는 바꾸지 않습니다.)
- */
-function stripArrowForSpeech(str) {
-  return str.replace(/[→←]/g, ',');
-}
-
-/**
  * 현재 화면(screenName)에 해당하는 안내 문구를 모아 현재 언어로 읽습니다.
  * ui.js의 renderCurrentScreen()에서 화면을 다시 그린 직후 호출됩니다.
  * 언어 선택 화면(LANG_SELECT)은 아직 언어가 정해지지 않았으므로 읽지 않습니다.
@@ -96,12 +87,11 @@ function speakScreen(screenName) {
     case SCREENS.SCREEN3A:
       text = tr.screen3a.message;
       break;
-    case SCREENS.SCREEN3B: {
-      const s3b = tr.screen3b;
-      const bullets = s3b.bullets.map(stripArrowForSpeech).join('. ');
-      text = [s3b.intro, bullets, s3b.outro].join('. ');
+    case SCREENS.SCREEN3B:
+      // 화면3B는 intro(청소직원이 도와줄 수 없다는 안내)만 읽습니다.
+      // 불릿 목록·outro는 화면에는 표시되지만 음성으로는 읽지 않습니다.
+      text = tr.screen3b.intro;
       break;
-    }
     case SCREENS.SCREEN3C:
       text = tr.screen3c.message;
       break;
