@@ -7,9 +7,13 @@
  * ★ 문구 수정 방법:
  *   아래 TRANSLATIONS 객체에서 해당 언어 코드를 찾아 텍스트를 바꾸면 됩니다.
  *
- * ★ 언어 추가 방법:
- *   1. LANGUAGES 배열에 { code, name } 항목을 추가하세요.
+ * ★ 손님 언어 추가 방법:
+ *   1. LANGUAGES 배열에 { code, name, img } 항목을 추가하세요.
  *   2. TRANSLATIONS 객체에 같은 코드로 번역 항목을 추가하세요.
+ *   3. STAFF_UI의 각 직원 언어 langNames에 그 언어의 이름을 추가하세요.
+ *
+ * ★ 직원 언어 추가 방법:
+ *   STAFF_LANGUAGES 배열 위의 주석을 참고하세요.
  * ─────────────────────────────────────────────────────────────────────
  */
 
@@ -33,6 +37,84 @@ const LANGUAGES = [
   { code: 'hi', name: 'हिन्दी',    img: 'assets/image/Flag_of_India.svg.png'   },
   { code: 'id', name: 'Indonesia', img: 'assets/image/id.svg'                  },
 ];
+
+// ── 직원(청소 담당) 언어 선택 버튼 목록 ───────────────────────────────
+// 첫 화면에서 직원이 자기 언어를 고릅니다. 이후 손님용 화면의 버튼·문구
+// 아래에 이 언어로 된 작은 해석이 붙어, 손님이 무엇을 눌렀는지 직원이
+// 알 수 있습니다. 손님용 LANGUAGES와 달리 실제 근무 중인 직원들의
+// 언어만 담습니다.
+//
+// ★ 직원 언어 추가 방법:
+//   1. STAFF_LANGUAGES 배열에 { code, name, img } 항목을 추가하세요.
+//   2. TRANSLATIONS 객체에 같은 코드의 번역이 있는지 확인하세요.
+//      (없으면 추가해야 합니다 — 해석 문구가 여기서 나옵니다.)
+//   3. STAFF_UI 객체에 같은 코드의 항목(staffLabel, guestPrompt,
+//      langNames)을 추가하세요.
+const STAFF_LANGUAGES = [
+  { code: 'ko', name: '한국어',    img: 'assets/image/kr.svg'    },
+  { code: 'en', name: 'English',   img: 'assets/image/globe.svg' },
+  { code: 'zh', name: '中文',      img: 'assets/image/cn.svg'    },
+  { code: 'bn', name: 'বাংলা',      img: 'assets/image/bd.svg'    },
+  { code: 'pt', name: 'Português', img: 'assets/image/br.svg'    },
+];
+
+// ── 직원 화면 전용 문구 ───────────────────────────────────────────────
+// staffLabel : 첫 화면 제목에 나란히 표시되는 "직원" 단어
+// guestPrompt: 손님 언어 선택 화면 맨 위에 직원에게만 보이는 안내
+// langNames  : 손님 언어 버튼 아래에 붙는, 그 언어의 직원 언어 이름
+//              (예: 직원이 한국어면 '中文' 버튼 아래에 '중국어')
+const STAFF_UI = {
+  ko: {
+    staffLabel : '직원',
+    guestPrompt: '손님에게 화면을 보여주고 언어를 고르게 하세요',
+    langNames  : {
+      ko: '한국어',   en: '영어',       zh: '중국어',   ja: '일본어',
+      ru: '러시아어', es: '스페인어',   mn: '몽골어',   vi: '베트남어',
+      fr: '프랑스어', de: '독일어',     ar: '아랍어',   tr: '튀르키예어',
+      th: '태국어',   si: '싱할라어',   hi: '힌디어',   id: '인도네시아어',
+    },
+  },
+  en: {
+    staffLabel : 'Staff',
+    guestPrompt: 'Show this screen to the guest and let them pick a language',
+    langNames  : {
+      ko: 'Korean',  en: 'English', zh: 'Chinese', ja: 'Japanese',
+      ru: 'Russian', es: 'Spanish', mn: 'Mongolian', vi: 'Vietnamese',
+      fr: 'French',  de: 'German',  ar: 'Arabic',  tr: 'Turkish',
+      th: 'Thai',    si: 'Sinhala', hi: 'Hindi',   id: 'Indonesian',
+    },
+  },
+  zh: {
+    staffLabel : '员工',
+    guestPrompt: '请把画面给客人看，让客人选择语言',
+    langNames  : {
+      ko: '韩语',     en: '英语',     zh: '中文',     ja: '日语',
+      ru: '俄语',     es: '西班牙语', mn: '蒙古语',   vi: '越南语',
+      fr: '法语',     de: '德语',     ar: '阿拉伯语', tr: '土耳其语',
+      th: '泰语',     si: '僧伽罗语', hi: '印地语',   id: '印尼语',
+    },
+  },
+  bn: {
+    staffLabel : 'কর্মী',
+    guestPrompt: 'অতিথিকে এই স্ক্রিন দেখান এবং তাঁর ভাষা বেছে নিতে বলুন',
+    langNames  : {
+      ko: 'কোরিয়ান',   en: 'ইংরেজি',    zh: 'চাইনিজ',    ja: 'জাপানি',
+      ru: 'রুশ',       es: 'স্প্যানিশ',   mn: 'মঙ্গোলীয়',   vi: 'ভিয়েতনামি',
+      fr: 'ফরাসি',     de: 'জার্মান',    ar: 'আরবি',      tr: 'তুর্কি',
+      th: 'থাই',       si: 'সিংহলি',    hi: 'হিন্দি',      id: 'ইন্দোনেশীয়',
+    },
+  },
+  pt: {
+    staffLabel : 'Funcionário',
+    guestPrompt: 'Mostre esta tela ao hóspede e peça que escolha o idioma',
+    langNames  : {
+      ko: 'Coreano', en: 'Inglês',  zh: 'Chinês',  ja: 'Japonês',
+      ru: 'Russo',   es: 'Espanhol', mn: 'Mongol', vi: 'Vietnamita',
+      fr: 'Francês', de: 'Alemão',  ar: 'Árabe',   tr: 'Turco',
+      th: 'Tailandês', si: 'Cingalês', hi: 'Híndi', id: 'Indonésio',
+    },
+  },
+};
 
 // ── 각 언어별 번역 데이터 ─────────────────────────────────────────────
 const TRANSLATIONS = {
@@ -579,6 +661,74 @@ const TRANSLATIONS = {
       note: '(Check-in tersedia mulai pukul 15:00)',
     },
     nav: { back: '← Kembali', home: '↺ Beranda' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // বাংলা — 직원 언어 전용 (손님 언어 목록에는 없습니다)
+  // ════════════════════════════════════════════════════════════════════
+  bn: {
+    selectLanguage: 'অনুগ্রহ করে আপনার ভাষা নির্বাচন করুন',
+    screen2: {
+      message: 'নমস্কার।\nচেক-আউটের সময় সকাল ১১টা।\nঅনুগ্রহ করে চেক-আউটের প্রস্তুতি নিন।',
+      btn1: 'বুঝেছি। আমি দ্রুত প্রস্তুত হয়ে বেরিয়ে যাব।',
+      btn2: 'আমি কি থাকার সময় বাড়াতে পারি?',
+      btn3: 'আমার চেক-আউটের তারিখ আজ নয়।',
+      btn4: 'আমি আজ অন্য রুমে চলে যাচ্ছি',
+    },
+    screen3a: {
+      message: 'ধন্যবাদ।',
+    },
+    screen3b: {
+      intro: 'আমি পরিচ্ছন্নতাকর্মী, তাই বুকিংয়ে সাহায্য করতে পারি না।\nঅনুগ্রহ করে অনলাইনে নিজেই সময় বাড়িয়ে নিন।',
+      bullets: [
+        'কোনো খালি রুম নেই → অনুগ্রহ করে চেক-আউটের প্রস্তুতি নিন',
+        'একই রুম বুক করা হয়েছে → আপনি এখানেই থাকতে পারেন',
+        'অন্য রুম বুক করা হয়েছে → বিছানা খালি করুন এবং বিকাল ৩টার পর আবার চেক-ইন করুন',
+      ],
+      outro: '১০ মিনিট পর আবার দেখতে আসব :)',
+    },
+    screen3c: {
+      message: 'দুঃখিত, মনে হচ্ছে কোথাও ভুল হয়েছে।\nআপনার বুকিংয়ের তথ্য দেখাতে পারবেন?\nআমি ম্যানেজারের সঙ্গে যাচাই করে নেব :)',
+    },
+    screen3d: {
+      message: 'আমরা যাতে পরিষ্কার করা শুরু করতে পারি, সেজন্য অনুগ্রহ করে যত তাড়াতাড়ি সম্ভব রুম (বিছানা) খালি করে দিন। ধন্যবাদ।',
+      note: '(চেক-ইন বিকাল ৩টা থেকে সম্ভব)',
+    },
+    nav: { back: '← পিছনে', home: '↺ শুরুতে' },
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // Português (Brasil) — 직원 언어 전용 (손님 언어 목록에는 없습니다)
+  // ════════════════════════════════════════════════════════════════════
+  pt: {
+    selectLanguage: 'Por favor, selecione seu idioma',
+    screen2: {
+      message: 'Olá.\nO horário de check-out é às 11h.\nPor favor, prepare-se para o check-out.',
+      btn1: 'Entendi. Vou me arrumar e sair logo.',
+      btn2: 'Posso estender minha estadia?',
+      btn3: 'Minha data de check-out não é hoje.',
+      btn4: 'Hoje vou mudar para outro quarto',
+    },
+    screen3a: {
+      message: 'Obrigado.',
+    },
+    screen3b: {
+      intro: 'Sou da equipe de limpeza e não posso ajudar com reservas.\nPor favor, faça a extensão on-line você mesmo.',
+      bullets: [
+        'Não há quarto disponível → Por favor, prepare-se para o check-out',
+        'Mesmo quarto reservado → Você pode continuar aqui',
+        'Outro quarto reservado → Desocupe a cama e faça o check-in novamente após as 15h',
+      ],
+      outro: 'Voltarei para verificar em 10 minutos :)',
+    },
+    screen3c: {
+      message: 'Desculpe, parece que houve algum engano.\nVocê poderia me mostrar os dados da sua reserva?\nVou verificar com o gerente :)',
+    },
+    screen3d: {
+      message: 'Por favor, desocupe o quarto (cama) o quanto antes para que possamos começar a limpeza. Obrigado.',
+      note: '(Check-in disponível a partir das 15h)',
+    },
+    nav: { back: '← Voltar', home: '↺ Início' },
   },
 
 }; // end TRANSLATIONS

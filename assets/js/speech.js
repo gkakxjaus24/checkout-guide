@@ -32,6 +32,8 @@ const SPEECH_LANG_MAP = {
   si: 'si-LK',
   hi: 'hi-IN',
   id: 'id-ID',
+  bn: 'bn-BD', // 직원 언어 (손님 목록에 추가할 경우를 위해 함께 둡니다)
+  pt: 'pt-BR', // 직원 언어 (   〃   )
 };
 
 // 버튼 라벨 음성이 끝난 뒤, 결과 화면 안내문을 읽기까지 쉬는 시간(ms).
@@ -143,13 +145,19 @@ function getPendingSpeechToken() {
 }
 
 /**
- * 현재 화면(screenName)에 해당하는 안내 문구를 모아 현재 언어로 읽습니다.
+ * 현재 화면(screenName)에 해당하는 안내 문구를 모아 손님 언어로 읽습니다.
  * ui.js의 renderCurrentScreen()에서 화면을 다시 그린 직후 호출됩니다.
- * 언어 선택 화면(LANG_SELECT)은 아직 언어가 정해지지 않았으므로 읽지 않습니다.
+ *
+ * 직원 언어 선택 화면(STAFF_SELECT)과 손님 언어 선택 화면(LANG_SELECT)은
+ * 아직 손님 언어가 정해지지 않았으므로 읽지 않습니다.
+ *
+ * 손님용 문구 아래에 붙는 작은 직원 언어 해석(ui.js의 staffSub)은 손님에게
+ * 들려줄 내용이 아니므로 읽지 않습니다. 여기서는 손님 언어 번역(t())만
+ * 가져다 씁니다.
  * @param {string} screenName - SCREENS 상수 중 하나
  */
 function speakScreen(screenName) {
-  if (screenName === SCREENS.LANG_SELECT) {
+  if (screenName === SCREENS.STAFF_SELECT || screenName === SCREENS.LANG_SELECT) {
     // 읽을 문구는 없지만, 재생 중이던 이전 화면 음성은 멈춥니다.
     cancelSpeech();
     return;

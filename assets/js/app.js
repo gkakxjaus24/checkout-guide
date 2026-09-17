@@ -14,20 +14,59 @@
  */
 
 // ── 언어 상태 ─────────────────────────────────────────────────────────
-let _currentLang = 'ko'; // 기본값: 한국어 (언어 선택 화면에서 덮어씌워짐)
+// 언어는 두 가지입니다.
+//   손님 언어(_currentLang) : 화면에 크게 표시되고 음성으로 읽히는 언어.
+//   직원 언어(_staffLang)   : 손님용 문구 아래에 작게 붙는 해석의 언어.
+//                             화면에만 표시되고 음성으로는 읽지 않습니다.
+// 이 덕분에 한국인 직원이 중국어를 몰라도, 손님이 누른 버튼 아래의
+// 작은 한국어 해석을 보고 손님이 무엇을 선택했는지 알 수 있습니다.
+let _currentLang = 'ko'; // 기본값: 한국어 (손님 언어 선택 화면에서 덮어씌워짐)
+let _staffLang   = 'ko'; // 기본값: 한국어 (직원 언어 선택 화면에서 덮어씌워짐)
 
-/** 현재 선택된 언어 코드로 변경합니다. */
+// 직원 언어를 기기에 저장해 둘 때 쓰는 키. 직원은 손님이 바뀌어도 그대로라서
+// 앱을 다시 열어도 지난번에 고른 언어를 그대로 쓸 수 있게 기억해 둡니다.
+const STAFF_LANG_STORAGE_KEY = 'checkoutGuide.staffLang';
+
+/** 현재 선택된 손님 언어 코드로 변경합니다. */
 function setLang(code) {
   _currentLang = code;
 }
 
-/** 현재 선택된 언어 코드를 반환합니다. */
+/** 현재 선택된 손님 언어 코드를 반환합니다. */
 function getLang() {
   return _currentLang;
 }
 
+/** 직원 언어를 바꾸고 기기에 저장합니다. */
+function setStaffLang(code) {
+  _staffLang = code;
+  // 시크릿 모드 등 localStorage를 못 쓰는 환경에서도 앱이 멈추지 않게 감쌉니다.
+  try {
+    localStorage.setItem(STAFF_LANG_STORAGE_KEY, code);
+  } catch (e) { /* 저장 실패는 무시 — 이번 세션 동안만 유지됩니다. */ }
+}
+
+/** 현재 직원 언어 코드를 반환합니다. */
+function getStaffLang() {
+  return _staffLang;
+}
+
 /**
- * 현재 언어의 번역 객체를 반환합니다.
+ * 지난번에 저장해 둔 직원 언어를 불러옵니다.
+ * 저장된 값이 없거나 더 이상 지원하지 않는 코드면 null을 반환합니다.
+ * @returns {string|null}
+ */
+function loadSavedStaffLang() {
+  let saved = null;
+  try {
+    saved = localStorage.getItem(STAFF_LANG_STORAGE_KEY);
+  } catch (e) { /* 읽기 실패는 무시 */ }
+  const isSupported = STAFF_LANGUAGES.some(lang => lang.code === saved);
+  return isSupported ? saved : null;
+}
+
+/**
+ * 현재 손님 언어의 번역 객체를 반환합니다.
  * ui.js에서 t().screen2.message 처럼 사용합니다.
  * 해당 코드가 없으면 한국어로 폴백합니다.
  */
@@ -35,10 +74,32 @@ function t() {
   return TRANSLATIONS[_currentLang] || TRANSLATIONS['ko'];
 }
 
+/**
+ * 현재 직원 언어의 번역 객체를 반환합니다. (손님용 문구의 해석에 사용)
+ * ui.js에서 ts().screen2.btn1 처럼 사용합니다.
+ */
+function ts() {
+  return TRANSLATIONS[_staffLang] || TRANSLATIONS['ko'];
+}
+
+/**
+ * 현재 직원 언어의 직원 화면 전용 문구(STAFF_UI 항목)를 반환합니다.
+ */
+function tsUI() {
+  return STAFF_UI[_staffLang] || STAFF_UI['ko'];
+}
+
 // ── 앱 초기화 ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-  // 라우터를 초기화하고 언어 선택 화면을 렌더링합니다.
-  initRouter();
+  // 지난번에 고른 직원 언어가 있으면 그대로 쓰고, 첫 화면을 건너뛰어
+  // 손님 언어 선택 화면부터 시작합니다. (직원 언어는 그 화면의
+  // '직원 언어' 버튼으로 언제든 다시 고를 수 있습니다.)
+  const savedStaffLang = loadSavedStaffLang();
+  if (savedStaffLang) {
+    setStaffLang(savedStaffLang);
+  }
+
+  initRouter(savedStaffLang ? SCREENS.LANG_SELECT : SCREENS.STAFF_SELECT);
   renderCurrentScreen();
 
   // 이벤트 위임: 클릭 이벤트를 #app 하나에서 모두 처리합니다.
@@ -62,7 +123,20 @@ function handleAction(event) {
 
   switch (action) {
 
-    // ── 언어 선택 버튼 ─────────────────────────────────────────────
+    // ── 직원 언어 선택 버튼 (첫 화면) ──────────────────────────────
+    case 'select-staff-lang': {
+      const staffLang = target.dataset.lang;
+      if (staffLang && TRANSLATIONS[staffLang]) {
+        setStaffLang(staffLang);
+        navigate(SCREENS.LANG_SELECT);
+      }
+      break;
+    }
+
+    // ── 직원 언어 다시 고르기 (손님 언어 화면의 작은 버튼) ─────────
+    case 'change-staff-lang': cancelChoiceIntro(); goStaffSelect(); break;
+
+    // ── 손님 언어 선택 버튼 ────────────────────────────────────────
     case 'select-lang': {
       const lang = target.dataset.lang;
       if (lang && TRANSLATIONS[lang]) {
