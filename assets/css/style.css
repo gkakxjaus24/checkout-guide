@@ -21,7 +21,7 @@ body {
     -apple-system, BlinkMacSystemFont,
     'Segoe UI', 'Noto Sans', 'Noto Sans KR',
     'Noto Sans JP', 'Noto Sans SC', 'Noto Sans Thai',
-    'Noto Sans Devanagari', Arial, sans-serif;
+    'Noto Sans Devanagari', 'Noto Sans Bengali', Arial, sans-serif;
   background: #fff;
   min-height: 100vh;
   color: #111;
@@ -80,12 +80,115 @@ button {
   cursor: pointer;
   transition: background 0.12s, border-color 0.12s;
   white-space: nowrap;
+  /* 손님 언어 라벨 아래에 직원 언어 해석이 한 줄 더 붙으므로 세로로 쌓습니다. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.3;
 }
 
 .nav-btn:hover  { background: #f5f5f5; border-color: #999; }
 .nav-btn:active { background: #eee;    transform: scale(0.97); }
 
 .nav-btn-home { margin-left: auto; }
+
+/* ── 직원 언어 해석 (손님용 문구 아래 작은 회색 글) ───────────────────
+   손님이 어떤 버튼을 눌렀는지 직원이 알 수 있도록 손님 언어 문구 아래에
+   직원 언어로 다는 작은 해석입니다. 손님이 읽을 문구보다 확실히 작고
+   흐리게 만들어, 손님의 시선은 큰 글씨에 머물게 합니다.
+   (손님 언어 = 직원 언어일 때는 ui.js가 아예 그리지 않습니다.) */
+.sub-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #6b6b6b;
+  word-break: keep-all;
+}
+
+/* 화면2 안내문(32px) 아래에 붙는 해석은 조금 크게 */
+.sub-label--message {
+  font-size: 15px;
+  text-align: center;
+}
+
+/* 언어 선택 버튼 안: 언어 이름 바로 아래 한 단어 */
+.sub-label--lang {
+  position: relative;   /* 국기 배경 위로 올립니다 */
+  z-index: 1;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #444;
+}
+
+/* 화면3B: 해석을 바로 위 문구에 붙이고, 아래 강조 박스와의 간격은
+   해석이 대신 갖습니다. (안 그러면 해석이 박스에 달라붙어 보입니다.) */
+.response-intro + .sub-label {
+  margin-top: -12px;
+  margin-bottom: 16px;
+}
+
+/* 내비게이션 버튼(11px) 안: 가장 작게 */
+.sub-label--nav {
+  margin-top: 1px;
+  font-size: 9px;
+  font-weight: 500;
+  color: #888;
+}
+
+/* ── 직원 언어 선택 화면 ─────────────────────────────────────────────── */
+/* 아직 직원 언어를 모르는 화면이라, 제목은 지원하는 직원 언어들의
+   '직원' 단어를 나란히 보여줍니다. */
+.staff-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #777;
+  text-align: center;
+  margin-bottom: 16px;
+  word-break: keep-all;
+}
+
+/* 5개처럼 홀수일 때 마지막 버튼이 두 칸을 차지하게 합니다. */
+.lang-btn--wide {
+  grid-column: span 2;
+  min-height: 84px;
+}
+
+/* ── 손님 언어 선택 화면 상단의 직원용 바 ────────────────────────────── */
+/* 직원에게만 의미 있는 안내라 작고 흐리게 둡니다. */
+.staff-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.staff-prompt {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* 직원 언어를 다시 고르는 버튼 (첫 화면으로 돌아갑니다) */
+.staff-lang-btn {
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.staff-lang-btn:hover  { background: #f5f5f5; border-color: #999; }
+.staff-lang-btn:active { background: #eee; transform: scale(0.97); }
 
 /* ── 언어 선택 화면 ──────────────────────────────────────────────────── */
 .lang-screen {
@@ -181,7 +284,9 @@ button {
   overflow: hidden;
   width: 100%;
   min-height: 62px;
-  padding: 16px 20px;
+  /* 아래 여백이 넉넉한 이유: 버튼 맨 아래의 안내음성 재생바(.btn-progress-track)와
+     직원 언어 해석(.sub-label)이 서로 겹치지 않게 하기 위해서입니다. */
+  padding: 16px 20px 22px;
   border-radius: 14px;
   border: 1.5px solid #222;
   background: #fff;

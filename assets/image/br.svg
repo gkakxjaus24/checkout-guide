@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">
+  <defs>
+    <clipPath id="globe"><circle cx="500" cy="350" r="175"/></clipPath>
+  </defs>
+  <path fill="#009c3b" d="M0 0h1000v700H0z"/>
+  <path fill="#ffdf00" d="M500 82 918 350 500 618 82 350z"/>
+  <circle cx="500" cy="350" r="175" fill="#002776"/>
+  <!-- 지구본을 가로지르는 흰 띠: 위쪽에 중심을 둔 두 원호 사이 영역을
+       지구본 모양으로 잘라냈습니다(가운데가 낮고 양끝이 올라간 곡선). -->
+  <path clip-path="url(#globe)" fill="#fff"
+        d="M40-45A460 460 0 0 0 960-45L920-45A420 420 0 0 1 80-45Z"/>
+</svg>
